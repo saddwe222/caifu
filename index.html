@@ -75,6 +75,16 @@
     button:hover {
       background: #1e40af;
     }
+    .message-box {
+      background: #fff9db;
+      border: 1px solid #fbbf24;
+      padding: 1rem;
+      border-radius: 6px;
+      color: #7c5100;
+      font-weight: bold;
+      margin-top: 1rem;
+      font-size: 1rem;
+    }
   </style>
 </head>
 <body>
@@ -123,11 +133,16 @@
         <div><strong>Total Keuntungan:</strong> <span id="totalProfit">-</span></div>
         <div><strong>Total Pengembalian:</strong> <span id="finalAmount">-</span></div>
       </div>
+      <div class="message-box" id="successMessage" style="margin-top: 1rem; display: none;">
+        🎉 Selamat, Anda telah berhasil membeli proyek senilai <span id="msgInvestment"></span> dengan jangka waktu <span id="msgDays"></span> hari!<br><br>
+        Anda akan menerima bonus sebesar <span id="msgBonus"></span>, dengan penghasilan harian <span id="msgDailyProfit"></span>, dan pada akhir masa investasi, Anda akan mendapatkan total pokok beserta keuntungan sekitar <span id="msgTotalReturn"></span>.<br><br>
+        Ini adalah langkah penting menuju kesuksesan Anda sekaligus awal dari pencapaian yang lebih besar di masa depan. Teruslah jaga semangat dan usaha Anda, kami akan mendukung sepenuhnya dan bekerja sama dengan Anda untuk menciptakan masa depan yang lebih baik!<br><br>
+        Semangat, kesuksesan sudah ada di depan mata! 🚀✨
+      </div>
     </section>
   </div>
 
   <script>
-    // 选择默认项目
     let selectedProject = {
       name: "BWM-Penerbitan Novel-15 Hari",
       days: 15,
@@ -139,7 +154,6 @@
       ],
     };
 
-    // 切换项目点击事件
     document.querySelectorAll(".project-card").forEach(card => {
       card.addEventListener("click", () => {
         document.querySelectorAll(".project-card").forEach(c => c.style.borderColor = "#ddd");
@@ -149,7 +163,6 @@
         selectedProject.days = parseInt(card.getAttribute("data-days"));
         selectedProject.dailyRate = parseFloat(card.getAttribute("data-rate"));
 
-        // 设置对应bonus tiers
         if(selectedProject.name.includes("15 Hari")){
           selectedProject.bonusTiers = [
             { min: 500000, max: 1999999, bonus: 2 },
@@ -166,7 +179,6 @@
       });
     });
 
-    // 默认选中第一个项目边框
     document.querySelector(".project-card").style.borderColor = "#2563eb";
 
     function formatCurrency(amount){
@@ -182,7 +194,6 @@
         return;
       }
 
-      // 计算适用的bonus百分比
       let bonusPercentage = 0;
       for(const tier of selectedProject.bonusTiers){
         if(amount >= tier.min && amount <= tier.max){
@@ -190,7 +201,6 @@
           break;
         }
       }
-
       const bonusAmount = amount * (bonusPercentage / 100);
       const adjustedPrincipal = amount + bonusAmount;
       const dailyProfit = adjustedPrincipal * (selectedProject.dailyRate / 100);
@@ -203,7 +213,15 @@
       document.getElementById("totalProfit").textContent = formatCurrency(Math.round(totalProfit));
       document.getElementById("finalAmount").textContent = formatCurrency(Math.round(finalAmount));
 
+      // Tampilkan pesan sukses dengan nilai dinamis
+      document.getElementById("msgInvestment").textContent = formatCurrency(amount);
+      document.getElementById("msgDays").textContent = selectedProject.days;
+      document.getElementById("msgBonus").textContent = formatCurrency(Math.round(bonusAmount)) + " (" + bonusPercentage + "%)";
+      document.getElementById("msgDailyProfit").textContent = formatCurrency(Math.round(dailyProfit));
+      document.getElementById("msgTotalReturn").textContent = formatCurrency(Math.round(finalAmount));
+
       document.getElementById("resultSection").style.display = "block";
+      document.getElementById("successMessage").style.display = "block";
     });
   </script>
 </body>
