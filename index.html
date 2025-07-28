@@ -1,236 +1,210 @@
-return (
-  <main className="min-h-screen bg-background p-4">
-    <div className="max-w-6xl mx-auto space-y-6">
-      {/* 页面头部 */}
-      <header className="text-center space-y-4" aria-label="投资计算器标题">
-        <div className="flex items-center justify-center gap-3">
-          <Calculator className="h-8 w-8 text-primary" aria-hidden="true" />
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-success bg-clip-text text-transparent">
-            Kalkulator Investasi BWM
-          </h1>
-        </div>
-        <p className="text-muted-foreground text-lg">
-          Hitung potensi keuntungan investasi novel publishing Anda
-        </p>
-      </header>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kalkulator Investasi BWM</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 1rem;
+      background: #f9fafb;
+      color: #333;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    header, section {
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2rem;
+      color: #2563eb;
+      margin-bottom: 0.3rem;
+    }
+    .project-card {
+      border: 1px solid #ddd;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      border-radius: 6px;
+      background: #fff;
+      transition: box-shadow 0.2s;
+    }
+    .project-card:hover {
+      box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-bottom: 0.5rem;
+    }
+    .info-text {
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+    .results {
+      background: #e0f2fe;
+      padding: 1rem;
+      border-radius: 6px;
+    }
+    .results div {
+      margin-bottom: 0.5rem;
+    }
+    button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.2rem;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 4px;
+      margin-top: 1rem;
+    }
+    button:hover {
+      background: #1e40af;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Kalkulator Investasi BWM</h1>
+      <p>Hitung potensi keuntungan investasi novel publishing Anda</p>
+    </header>
 
-      {/* 投资项目选择 */}
-      <section aria-label="Pilih proyek investasi" className="grid gap-4 md:grid-cols-2">
-        {projects.map((project, index) => {
-          const isSelected = selectedProject.name === project.name;
-          return (
-            <Card
-              key={index}
-              className={`cursor-pointer transition-all duration-300 hover:shadow-lg ${
-                isSelected ? "ring-2 ring-primary bg-primary/5" : "hover:bg-accent/50"
-              }`}
-              onClick={() => setSelectedProject(project)}
-              role="button"
-              tabIndex={0}
-              aria-pressed={isSelected}
-              aria-label={`Pilih proyek ${project.name}, durasi ${project.days} hari`}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  setSelectedProject(project);
-                }
-              }}
-            >
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-lg">{project.name}</CardTitle>
-                  <Badge variant={isSelected ? "default" : "secondary"}>
-                    {project.days} Hari
-                  </Badge>
-                </div>
-                <CardDescription>
-                  Suku bunga harian {project.dailyRate}% • Minimal Rp100.000
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2">
-                  <div className="text-sm font-medium">Bonus Tier:</div>
-                  {project.bonusTiers.map((tier, i) => (
-                    <div key={i} className="text-xs text-muted-foreground">
-                      {formatCurrency(tier.min)} -{" "}
-                      {tier.max === Infinity ? "ke atas" : formatCurrency(tier.max)}: +{tier.bonus}%
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          );
-        })}
-      </section>
+    <section>
+      <h2>Pilih Proyek Investasi</h2>
+      <div class="project-card" data-name="BWM-Penerbitan Novel-15 Hari" data-days="15" data-rate="1">
+        <strong>BWM-Penerbitan Novel-15 Hari</strong><br />
+        Durasi: 15 Hari<br />
+        Suku bunga harian: 1%<br />
+        Bonus Tier:<br />
+        - Rp500.000 - Rp1.999.999 : +2%<br />
+        - Rp2.000.000 - Rp4.999.999 : +3%<br />
+        - Rp5.000.000 ke atas : +4%
+      </div>
+      <div class="project-card" data-name="BWM-Penerbitan Novel-300 Hari" data-days="300" data-rate="3">
+        <strong>BWM-Penerbitan Novel-300 Hari</strong><br />
+        Durasi: 300 Hari<br />
+        Suku bunga harian: 3%<br />
+        Bonus Tier:<br />
+        - Rp500.000 - Rp1.999.999 : +8%<br />
+        - Rp2.000.000 - Rp4.999.999 : +9%<br />
+        - Rp5.000.000 ke atas : +10%
+      </div>
+    </section>
 
-      {/* 投资计算表单 */}
-      <section 
-        aria-label="Formulir kalkulator investasi" 
-        className="bg-card/50 backdrop-blur-sm rounded-lg"
-      >
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <DollarSign className="h-5 w-5" aria-hidden="true" />
-            Kalkulator Investasi
-          </CardTitle>
-          <CardDescription>
-            Masukkan jumlah investasi untuk melihat proyeksi keuntungan
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="space-y-2">
-            <Label htmlFor="amount">Jumlah Investasi (Rp)</Label>
-            <Input
-              id="amount"
-              placeholder="100.000"
-              value={investmentAmount}
-              onChange={(e) => handleAmountChange(e.target.value)}
-              className="text-lg font-medium"
-              inputMode="numeric"
-              aria-describedby="min-investasi-info"
-            />
-            <p id="min-investasi-info" className="text-sm text-muted-foreground">
-              Minimal investasi: Rp100.000
-            </p>
-          </div>
+    <section>
+      <h2>Masukkan Jumlah Investasi</h2>
+      <label for="investmentAmount">Jumlah Investasi (Rp)</label>
+      <input type="number" id="investmentAmount" placeholder="100000" min="100000" />
+      <div class="info-text">Minimal investasi: Rp100.000</div>
+      <button id="calculateBtn">Hitung Keuntungan</button>
+    </section>
 
-          {results && (
-            <>
-              <Separator />
+    <section id="resultSection" style="display:none;">
+      <h2>Hasil Perhitungan</h2>
+      <div class="results">
+        <div><strong>Bonus:</strong> <span id="bonusAmount">-</span></div>
+        <div><strong>Modal Disesuaikan:</strong> <span id="adjustedPrincipal">-</span></div>
+        <div><strong>Keuntungan Harian:</strong> <span id="dailyProfit">-</span></div>
+        <div><strong>Total Keuntungan:</strong> <span id="totalProfit">-</span></div>
+        <div><strong>Total Pengembalian:</strong> <span id="finalAmount">-</span></div>
+      </div>
+    </section>
+  </div>
 
-              <div
-                className="grid gap-4 md:grid-cols-2 lg:grid-cols-4"
-                role="region"
-                aria-label="Rincian hasil perhitungan investasi"
-              >
-                <Card className="bg-success/10 border-success/20" tabIndex={-1}>
-                  <CardContent className="p-4">
-                    <p className="text-sm text-muted-foreground">Bonus</p>
-                    <p className="text-xl font-bold text-success">
-                      {formatCurrency(results.bonusAmount)}
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      +{results.bonusPercentage}% dari investasi
-                    </p>
-                  </CardContent>
-                </Card>
+  <script>
+    // 选择默认项目
+    let selectedProject = {
+      name: "BWM-Penerbitan Novel-15 Hari",
+      days: 15,
+      dailyRate: 1,
+      bonusTiers: [
+        { min: 500000, max: 1999999, bonus: 2 },
+        { min: 2000000, max: 4999999, bonus: 3 },
+        { min: 5000000, max: Infinity, bonus: 4 },
+      ],
+    };
 
-                <Card className="bg-primary/10 border-primary/20" tabIndex={-1}>
-                  <CardContent className="p-4">
-                    <p className="text-sm text-muted-foreground">Modal Disesuaikan</p>
-                    <p className="text-xl font-bold text-primary">
-                      {formatCurrency(results.adjustedPrincipal)}
-                    </p>
-                    <p className="text-xs text-muted-foreground">Termasuk bonus</p>
-                  </CardContent>
-                </Card>
+    // 切换项目点击事件
+    document.querySelectorAll(".project-card").forEach(card => {
+      card.addEventListener("click", () => {
+        document.querySelectorAll(".project-card").forEach(c => c.style.borderColor = "#ddd");
+        card.style.borderColor = "#2563eb";
 
-                <Card className="bg-gold/10 border-gold/20" tabIndex={-1}>
-                  <CardContent className="p-4">
-                    <p className="text-sm text-muted-foreground">Keuntungan Harian</p>
-                    <p className="text-xl font-bold text-gold">
-                      {formatCurrency(results.dailyProfit)}
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      {selectedProject.dailyRate}% per hari
-                    </p>
-                  </CardContent>
-                </Card>
+        selectedProject.name = card.getAttribute("data-name");
+        selectedProject.days = parseInt(card.getAttribute("data-days"));
+        selectedProject.dailyRate = parseFloat(card.getAttribute("data-rate"));
 
-                <Card className="bg-profit/10 border-profit/20" tabIndex={-1}>
-                  <CardContent className="p-4">
-                    <p className="text-sm text-muted-foreground">Total Keuntungan</p>
-                    <p className="text-xl font-bold text-profit">
-                      {formatCurrency(results.totalProfit)}
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      Selama {selectedProject.days} hari
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
+        // 设置对应bonus tiers
+        if(selectedProject.name.includes("15 Hari")){
+          selectedProject.bonusTiers = [
+            { min: 500000, max: 1999999, bonus: 2 },
+            { min: 2000000, max: 4999999, bonus: 3 },
+            { min: 5000000, max: Infinity, bonus: 4 },
+          ];
+        } else {
+          selectedProject.bonusTiers = [
+            { min: 500000, max: 1999999, bonus: 8 },
+            { min: 2000000, max: 4999999, bonus: 9 },
+            { min: 5000000, max: Infinity, bonus: 10 },
+          ];
+        }
+      });
+    });
 
-              <Card
-                className="bg-gradient-to-r from-primary/20 to-success/20 border-primary/30"
-                tabIndex={-1}
-                aria-live="polite"
-              >
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <TrendingUp className="h-6 w-6 text-primary" aria-hidden="true" />
-                    <h2 className="text-lg font-semibold">Total Pengembalian</h2>
-                  </div>
-                  <p className="text-3xl font-bold text-primary mb-2" aria-label="Total pengembalian investasi">
-                    {formatCurrency(results.finalAmount)}
-                  </p>
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="h-4 w-4" aria-hidden="true" />
-                      <span>Setelah {selectedProject.days} hari</span>
-                    </div>
-                    <div>
-                      ROI:{" "}
-                      {(
-                        ((results.finalAmount -
-                          parseFloat(investmentAmount.replace(/[^0-9]/g, ""))) /
-                          parseFloat(investmentAmount.replace(/[^0-9]/g, ""))) *
-                        100
-                      ).toFixed(1)}
-                      %
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+    // 默认选中第一个项目边框
+    document.querySelector(".project-card").style.borderColor = "#2563eb";
 
-              {/* 复制按钮 */}
-              <nav className="flex gap-2" aria-label="Aksi">
-                <Button
-                  onClick={copyResults}
-                  className="flex-1 bg-gradient-to-r from-primary to-success hover:from-primary/90 hover:to-success/90"
-                  size="lg"
-                  aria-label="Salin hasil investasi ke clipboard"
-                >
-                  <Copy className="h-5 w-5 mr-2" aria-hidden="true" />
-                  Salin Hasil Investasi
-                </Button>
-                <Button onClick={copyResults} variant="outline" size="lg" aria-label="Bagikan hasil investasi">
-                  <Share2 className="h-5 w-5" aria-hidden="true" />
-                </Button>
-              </nav>
+    function formatCurrency(amount){
+      return "Rp" + amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
 
-              {/* 详细计算说明 */}
-              <aside className="bg-muted/30 p-4 rounded-lg" aria-label="Breakdown perhitungan investasi">
-                <h3 className="font-semibold mb-2">Breakdown Perhitungan:</h3>
-                <dl className="space-y-1 text-sm text-muted-foreground">
-                  <div>
-                    <dt>1. Investasi awal:</dt>
-                    <dd>{formatCurrency(parseFloat(investmentAmount.replace(/[^0-9]/g, "")))}</dd>
-                  </div>
-                  <div>
-                    <dt>2. Bonus {results.bonusPercentage}%:</dt>
-                    <dd>{formatCurrency(results.bonusAmount)}</dd>
-                  </div>
-                  <div>
-                    <dt>3. Modal disesuaikan:</dt>
-                    <dd>{formatCurrency(results.adjustedPrincipal)}</dd>
-                  </div>
-                  <div>
-                    <dt>4. Keuntungan harian ({selectedProject.dailyRate}%):</dt>
-                    <dd>{formatCurrency(results.dailyProfit)}</dd>
-                  </div>
-                  <div>
-                    <dt>5. Total keuntungan ({selectedProject.days} hari):</dt>
-                    <dd>{formatCurrency(results.totalProfit)}</dd>
-                  </div>
-                  <div className="font-semibold text-foreground">
-                    <dt>6. Total pengembalian:</dt>
-                    <dd>{formatCurrency(results.finalAmount)}</dd>
-                  </div>
-                </dl>
-              </aside>
-            </>
-          )}
-        </CardContent>
-      </section>
-    </div>
-  </main>
-);
+    document.getElementById("calculateBtn").addEventListener("click", () => {
+      const input = document.getElementById("investmentAmount").value;
+      const amount = Number(input);
+
+      if (!amount || amount < 100000) {
+        alert("Jumlah investasi minimal Rp100.000");
+        return;
+      }
+
+      // 计算适用的bonus百分比
+      let bonusPercentage = 0;
+      for(const tier of selectedProject.bonusTiers){
+        if(amount >= tier.min && amount <= tier.max){
+          bonusPercentage = tier.bonus;
+          break;
+        }
+      }
+
+      const bonusAmount = amount * (bonusPercentage / 100);
+      const adjustedPrincipal = amount + bonusAmount;
+      const dailyProfit = adjustedPrincipal * (selectedProject.dailyRate / 100);
+      const totalProfit = dailyProfit * selectedProject.days;
+      const finalAmount = adjustedPrincipal + totalProfit;
+
+      document.getElementById("bonusAmount").textContent = formatCurrency(Math.round(bonusAmount));
+      document.getElementById("adjustedPrincipal").textContent = formatCurrency(Math.round(adjustedPrincipal));
+      document.getElementById("dailyProfit").textContent = formatCurrency(Math.round(dailyProfit));
+      document.getElementById("totalProfit").textContent = formatCurrency(Math.round(totalProfit));
+      document.getElementById("finalAmount").textContent = formatCurrency(Math.round(finalAmount));
+
+      document.getElementById("resultSection").style.display = "block";
+    });
+  </script>
+</body>
+</html>
