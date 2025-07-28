@@ -1,315 +1,337 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generator Pesan Konfirmasi Investasi</title>
-    <style>
-        :root {
-            --primary-color: #4285f4;
-            --success-color: #34a853;
-            --warning-color: #fbbc05;
-            --danger-color: #ea4335;
-            --light-gray: #f5f5f5;
-            --dark-gray: #333;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            max-width: 650px;
-            margin: 0 auto;
-            padding: 20px;
-            line-height: 1.6;
-            color: var(--dark-gray);
-            background-color: #f9f9f9;
-        }
-        
-        h1 {
-            color: var(--primary-color);
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .card {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 25px;
-            margin-bottom: 25px;
-        }
-        
-        .input-group {
-            margin-bottom: 20px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--dark-gray);
-        }
-        
-        input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 16px;
-            box-sizing: border-box;
-            transition: border-color 0.3s;
-        }
-        
-        input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: none;
-            text-align: center;
-        }
-        
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background-color: #3367d6;
-            transform: translateY(-2px);
-        }
-        
-        .btn-success {
-            background-color: var(--success-color);
-            color: white;
-        }
-        
-        .btn-success:hover {
-            background-color: #2d924a;
-        }
-        
-        .message-container {
-            position: relative;
-            border-left: 4px solid var(--primary-color);
-            background-color: var(--light-gray);
-        }
-        
-        .highlight {
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-        
-        .bonus-highlight {
-            color: var(--success-color);
-            font-weight: 700;
-        }
-        
-        .emoji {
-            font-size: 1.2em;
-        }
-        
-        .alert {
-            padding: 12px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            display: none;
-        }
-        
-        .alert-success {
-            background-color: rgba(52, 168, 83, 0.1);
-            color: var(--success-color);
-            border-left: 4px solid var(--success-color);
-        }
-        
-        .tooltip {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 200px;
-            background-color: #555;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -100px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
-        }
-        
-        @media (max-width: 600px) {
-            body {
-                padding: 15px;
-            }
-            
-            .card {
-                padding: 15px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <h1>Generator Pesan Konfirmasi Investasi</h1>
-    
-    <div class="card">
-        <div class="input-group">
-            <label for="amount">Jumlah Investasi (Rp):</label>
-            <input type="number" id="amount" placeholder="500000" min="100000">
-        </div>
-        
-        <div id="errorAlert" class="alert" style="display:none;">
-            Masukkan jumlah investasi yang valid (minimal Rp100.000)
-        </div>
-        
-        <button class="btn btn-primary" onclick="generateMessage()">
-            Generate Pesan
-        </button>
-    </div>
-    
-    <div id="messageContainer" class="card message-container" style="display:none;">
-        <p><span class="emoji">🎉</span> Selamat, Anda telah berhasil membeli proyek senilai <span class="highlight" id="investAmount">500.000</span> rupiah dengan jangka waktu 180 hari!</p>
-        
-        <p>Anda akan menerima bonus sebesar <span class="bonus-highlight" id="bonusAmount">5.000</span> rupiah (<span id="bonusPercentage">1%</span>), dengan penghasilan harian <span class="highlight" id="dailyEarnings">Rp24.750</span>, dan pada akhir masa investasi, Anda akan mendapatkan total pokok beserta keuntungan sekitar <span class="highlight" id="totalReturn">Rp4.955.000</span>.</p>
-        
-        <p>Ini adalah langkah penting menuju kesuksesan Anda sekaligus awal dari pencapaian yang lebih besar di masa depan. Teruslah jaga semangat dan usaha Anda, kami akan mendukung sepenuhnya dan bekerja sama dengan Anda untuk menciptakan masa depan yang lebih baik!</p>
-        
-        <p>Semangat, kesuksesan sudah ada di depan mata! <span class="emoji">🚀✨</span></p>
-        
-        <div id="bonusInfo" style="margin-top: 15px; display:none;">
-            <p><span class="emoji">🎁</span> <span id="bonusItem" class="bonus-highlight"></span></p>
-        </div>
-        
-        <div style="margin-top: 25px;">
-            <button id="copyBtn" class="btn btn-success tooltip" onclick="copyMessage()">
-                Salin Pesan
-                <span class="tooltiptext">Klik untuk menyalin ke clipboard</span>
-            </button>
-            <div id="copySuccess" class="alert alert-success" style="display:none;">
-                Pesan telah berhasil disalin!
-            </div>
-        </div>
-    </div>
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { Calculator, TrendingUp, Calendar, DollarSign, Copy, Share2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
-    <script>
-        function generateMessage() {
-            const amountInput = document.getElementById('amount');
-            const amount = parseInt(amountInput.value);
-            const errorAlert = document.getElementById('errorAlert');
-            
-            // Reset UI
-            errorAlert.style.display = 'none';
-            amountInput.style.borderColor = '#ddd';
-            
-            // Validate input
-            if (isNaN(amount) || amount < 100000) {
-                errorAlert.style.display = 'block';
-                amountInput.style.borderColor = 'var(--danger-color)';
-                amountInput.focus();
-                return;
-            }
-            
-            // Calculate values
-            let bonusPercentage = 0;
-            let bonusItem = "";
-            
-            if (amount >= 500000 && amount <= 1999999) {
-                bonusPercentage = 10;
-            } else if (amount >= 2000000 && amount <= 4999999) {
-                bonusPercentage = 15;
-            } else if (amount >= 5000000 && amount <= 19999999) {
-                bonusPercentage = 20;
-                bonusItem = "Bonus: Air Fryer (nilai Rp600.000)";
-            } else if (amount >= 20000000) {
-                bonusPercentage = 30;
-                bonusItem = "Bonus: Tablet (nilai Rp4.500.000)";
-            }
-            
-            const bonusAmount = Math.round(amount * (bonusPercentage/100));
-            const dailyEarnings = Math.round((amount + bonusAmount) * 0.045);
-            const totalProfit = dailyEarnings * 180;
-            const totalReturn = totalProfit + amount;
-            
-            // Format numbers
-            function formatNumber(num) {
-                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-            }
-            
-            // Update message
-            document.getElementById('investAmount').textContent = formatNumber(amount);
-            document.getElementById('bonusAmount').textContent = formatNumber(bonusAmount);
-            document.getElementById('bonusPercentage').textContent = bonusPercentage + '%';
-            document.getElementById('dailyEarnings').textContent = 'Rp' + formatNumber(dailyEarnings);
-            document.getElementById('totalReturn').textContent = 'Rp' + formatNumber(totalReturn);
-            
-            // Show bonus info if applicable
-            const bonusInfo = document.getElementById('bonusInfo');
-            if (bonusItem) {
-                document.getElementById('bonusItem').textContent = bonusItem;
-                bonusInfo.style.display = 'block';
-            } else {
-                bonusInfo.style.display = 'none';
-            }
-            
-            // Show message container
-            document.getElementById('messageContainer').style.display = 'block';
-            
-            // Scroll to message
-            setTimeout(() => {
-                document.getElementById('messageContainer').scrollIntoView({ 
-                    behavior: 'smooth' 
-                });
-            }, 100);
-        }
-        
-        function copyMessage() {
-            const messageContainer = document.getElementById('messageContainer');
-            const range = document.createRange();
-            range.selectNode(messageContainer);
-            window.getSelection().removeAllRanges();
-            window.getSelection().addRange(range);
-            
-            try {
-                const successful = document.execCommand('copy');
-                const copySuccess = document.getElementById('copySuccess');
+interface ProjectData {
+  name: string;
+  days: number;
+  dailyRate: number;
+  bonusTiers: {
+    min: number;
+    max: number;
+    bonus: number;
+  }[];
+}
+
+const projects: ProjectData[] = [
+  {
+    name: "BWM-Penerbitan Novel-15 Hari",
+    days: 15,
+    dailyRate: 1,
+    bonusTiers: [
+      { min: 500000, max: 1999999, bonus: 2 },
+      { min: 2000000, max: 4999999, bonus: 3 },
+      { min: 5000000, max: Infinity, bonus: 4 }
+    ]
+  },
+  {
+    name: "BWM-Penerbitan Novel-300 Hari",
+    days: 300,
+    dailyRate: 3,
+    bonusTiers: [
+      { min: 500000, max: 1999999, bonus: 8 },
+      { min: 2000000, max: 4999999, bonus: 9 },
+      { min: 5000000, max: Infinity, bonus: 10 }
+    ]
+  }
+];
+
+const formatCurrency = (amount: number) => {
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(amount);
+};
+
+const InvestmentCalculator = () => {
+  const { toast } = useToast();
+  const [selectedProject, setSelectedProject] = useState<ProjectData>(projects[0]);
+  const [investmentAmount, setInvestmentAmount] = useState<string>("");
+  const [results, setResults] = useState<{
+    bonusAmount: number;
+    adjustedPrincipal: number;
+    dailyProfit: number;
+    totalProfit: number;
+    finalAmount: number;
+    bonusPercentage: number;
+  } | null>(null);
+
+  const calculateReturns = () => {
+    const amount = parseFloat(investmentAmount.replace(/[^0-9]/g, ""));
+    
+    if (!amount || amount < 100000) {
+      setResults(null);
+      return;
+    }
+
+    // Find applicable bonus tier
+    let bonusPercentage = 0;
+    for (const tier of selectedProject.bonusTiers) {
+      if (amount >= tier.min && amount <= tier.max) {
+        bonusPercentage = tier.bonus;
+        break;
+      }
+    }
+
+    const bonusAmount = (amount * bonusPercentage) / 100;
+    const adjustedPrincipal = amount + bonusAmount;
+    const dailyProfit = (adjustedPrincipal * selectedProject.dailyRate) / 100;
+    const totalProfit = dailyProfit * selectedProject.days;
+    const finalAmount = adjustedPrincipal + totalProfit;
+
+    setResults({
+      bonusAmount,
+      adjustedPrincipal,
+      dailyProfit,
+      totalProfit,
+      finalAmount,
+      bonusPercentage
+    });
+  };
+
+  useEffect(() => {
+    if (investmentAmount) {
+      calculateReturns();
+    }
+  }, [investmentAmount, selectedProject]);
+
+  const handleAmountChange = (value: string) => {
+    // Remove all non-numeric characters
+    const numericValue = value.replace(/[^0-9]/g, "");
+    
+    // Format with dots as thousand separators
+    const formattedValue = numericValue.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    
+    setInvestmentAmount(formattedValue);
+  };
+
+  const copyResults = async () => {
+    if (!results) return;
+
+    const originalAmount = parseFloat(investmentAmount.replace(/[^0-9]/g, ""));
+    
+    const message = `🎉 Selamat, Anda telah berhasil membeli proyek ${selectedProject.name} senilai ${formatCurrency(originalAmount)} dengan jangka waktu ${selectedProject.days} hari!
+
+Anda akan menerima bonus sebesar ${formatCurrency(results.bonusAmount)} (${results.bonusPercentage}%), dengan penghasilan harian ${formatCurrency(results.dailyProfit)}, dan pada akhir masa investasi, Anda akan mendapatkan total pokok beserta keuntungan sekitar ${formatCurrency(results.finalAmount)}.
+
+Ini adalah langkah penting menuju kesuksesan Anda sekaligus awal dari pencapaian yang lebih besar di masa depan. Teruslah jaga semangat dan usaha Anda, kami akan mendukung sepenuhnya dan bekerja sama dengan Anda untuk menciptakan masa depan yang lebih baik!
+
+Semangat, kesuksesan sudah ada di depan mata! 🚀✨`;
+
+    try {
+      await navigator.clipboard.writeText(message);
+      toast({
+        title: "✅ Berhasil disalin!",
+        description: "Data investasi telah disalin ke clipboard",
+      });
+    } catch (err) {
+      toast({
+        title: "❌ Gagal menyalin",
+        description: "Silakan coba lagi atau salin manual",
+        variant: "destructive",
+      });
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-background p-4">
+      <div className="max-w-6xl mx-auto space-y-6">
+        {/* Header */}
+        <div className="text-center space-y-4">
+          <div className="flex items-center justify-center gap-3">
+            <Calculator className="h-8 w-8 text-primary" />
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-success bg-clip-text text-transparent">
+              Kalkulator Investasi BWM
+            </h1>
+          </div>
+          <p className="text-muted-foreground text-lg">
+            Hitung potensi keuntungan investasi novel publishing Anda
+          </p>
+        </div>
+
+        {/* Project Selection */}
+        <div className="grid gap-4 md:grid-cols-2">
+          {projects.map((project, index) => (
+            <Card 
+              key={index}
+              className={`cursor-pointer transition-all duration-300 hover:shadow-lg ${
+                selectedProject.name === project.name 
+                  ? 'ring-2 ring-primary bg-primary/5' 
+                  : 'hover:bg-accent/50'
+              }`}
+              onClick={() => setSelectedProject(project)}
+            >
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-lg">{project.name}</CardTitle>
+                  <Badge variant={selectedProject.name === project.name ? "default" : "secondary"}>
+                    {project.days} Hari
+                  </Badge>
+                </div>
+                <CardDescription>
+                  Suku bunga harian {project.dailyRate}% • Minimal Rp100.000
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2">
+                  <div className="text-sm font-medium">Bonus Tier:</div>
+                  {project.bonusTiers.map((tier, tierIndex) => (
+                    <div key={tierIndex} className="text-xs text-muted-foreground">
+                      {formatCurrency(tier.min)} - {tier.max === Infinity ? "ke atas" : formatCurrency(tier.max)}: +{tier.bonus}%
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* Calculator */}
+        <Card className="bg-card/50 backdrop-blur-sm">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <DollarSign className="h-5 w-5" />
+              Kalkulator Investasi
+            </CardTitle>
+            <CardDescription>
+              Masukkan jumlah investasi untuk melihat proyeksi keuntungan
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="space-y-2">
+              <Label htmlFor="amount">Jumlah Investasi (Rp)</Label>
+              <Input
+                id="amount"
+                placeholder="100.000"
+                value={investmentAmount}
+                onChange={(e) => handleAmountChange(e.target.value)}
+                className="text-lg font-medium"
+              />
+              <div className="text-sm text-muted-foreground">
+                Minimal investasi: Rp100.000
+              </div>
+            </div>
+
+            {results && (
+              <div className="space-y-4">
+                <Separator />
                 
-                if (successful) {
-                    copySuccess.style.display = 'block';
-                    setTimeout(() => {
-                        copySuccess.style.display = 'none';
-                    }, 3000);
-                }
-            } catch (err) {
-                console.error('Gagal menyalin teks: ', err);
-            }
-            
-            window.getSelection().removeAllRanges();
-        }
-        
-        // Allow pressing Enter to generate message
-        document.getElementById('amount').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                generateMessage();
-            }
-        });
-    </script>
-</body>
-</html>
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                  <Card className="bg-success/10 border-success/20">
+                    <CardContent className="p-4">
+                      <div className="text-sm text-muted-foreground">Bonus</div>
+                      <div className="text-xl font-bold text-success">
+                        {formatCurrency(results.bonusAmount)}
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        +{results.bonusPercentage}% dari investasi
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-primary/10 border-primary/20">
+                    <CardContent className="p-4">
+                      <div className="text-sm text-muted-foreground">Modal Disesuaikan</div>
+                      <div className="text-xl font-bold text-primary">
+                        {formatCurrency(results.adjustedPrincipal)}
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        Termasuk bonus
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-gold/10 border-gold/20">
+                    <CardContent className="p-4">
+                      <div className="text-sm text-muted-foreground">Keuntungan Harian</div>
+                      <div className="text-xl font-bold text-gold">
+                        {formatCurrency(results.dailyProfit)}
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        {selectedProject.dailyRate}% per hari
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-profit/10 border-profit/20">
+                    <CardContent className="p-4">
+                      <div className="text-sm text-muted-foreground">Total Keuntungan</div>
+                      <div className="text-xl font-bold text-profit">
+                        {formatCurrency(results.totalProfit)}
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        Selama {selectedProject.days} hari
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                <Card className="bg-gradient-to-r from-primary/20 to-success/20 border-primary/30">
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <TrendingUp className="h-6 w-6 text-primary" />
+                      <div className="text-lg font-semibold">Total Pengembalian</div>
+                    </div>
+                    <div className="text-3xl font-bold text-primary mb-2">
+                      {formatCurrency(results.finalAmount)}
+                    </div>
+                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                      <div className="flex items-center gap-1">
+                        <Calendar className="h-4 w-4" />
+                        Setelah {selectedProject.days} hari
+                      </div>
+                      <div>
+                        ROI: {(((results.finalAmount - parseFloat(investmentAmount.replace(/[^0-9]/g, ""))) / parseFloat(investmentAmount.replace(/[^0-9]/g, ""))) * 100).toFixed(1)}%
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Copy Results Button */}
+                <div className="flex gap-2">
+                  <Button 
+                    onClick={copyResults}
+                    className="flex-1 bg-gradient-to-r from-primary to-success hover:from-primary/90 hover:to-success/90"
+                    size="lg"
+                  >
+                    <Copy className="h-5 w-5 mr-2" />
+                    Salin Hasil Investasi
+                  </Button>
+                  <Button 
+                    onClick={copyResults}
+                    variant="outline"
+                    size="lg"
+                  >
+                    <Share2 className="h-5 w-5" />
+                  </Button>
+                </div>
+
+                <div className="bg-muted/30 p-4 rounded-lg">
+                  <h3 className="font-semibold mb-2">Breakdown Perhitungan:</h3>
+                  <div className="space-y-1 text-sm text-muted-foreground">
+                    <div>1. Investasi awal: {formatCurrency(parseFloat(investmentAmount.replace(/[^0-9]/g, "")))}</div>
+                    <div>2. Bonus {results.bonusPercentage}%: {formatCurrency(results.bonusAmount)}</div>
+                    <div>3. Modal disesuaikan: {formatCurrency(results.adjustedPrincipal)}</div>
+                    <div>4. Keuntungan harian ({selectedProject.dailyRate}%): {formatCurrency(results.dailyProfit)}</div>
+                    <div>5. Total keuntungan ({selectedProject.days} hari): {formatCurrency(results.totalProfit)}</div>
+                    <div className="font-semibold text-foreground">6. Total pengembalian: {formatCurrency(results.finalAmount)}</div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+};
+
+export default InvestmentCalculator;
