@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kalkulator Investasi BWM</title>
+  <title>懒人使用器</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -12,7 +12,7 @@
       color: #333;
     }
     .container {
-      max-width: 900px;
+      max-width: 1200px;
       margin: 0 auto;
     }
     header, section {
@@ -23,17 +23,28 @@
       color: #2563eb;
       margin-bottom: 0.3rem;
     }
+    .projects-container {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
     .project-card {
       border: 1px solid #ddd;
       padding: 1rem;
-      margin-bottom: 1rem;
+      flex: 1;
       cursor: pointer;
       border-radius: 6px;
       background: #fff;
-      transition: box-shadow 0.2s;
+      transition: all 0.2s;
+      min-height: 250px;
     }
     .project-card:hover {
       box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+      transform: translateY(-2px);
+    }
+    .project-card.selected {
+      border-color: #2563eb;
+      background-color: #f0f7ff;
     }
     label {
       font-weight: bold;
@@ -71,6 +82,7 @@
       cursor: pointer;
       border-radius: 4px;
       margin-top: 1rem;
+      transition: background 0.2s;
     }
     button:hover {
       background: #1e40af;
@@ -85,6 +97,19 @@
       margin-top: 1rem;
       font-size: 1rem;
     }
+    .gift-info {
+      color: #dc2626;
+      font-weight: bold;
+      margin-top: 0.5rem;
+    }
+    .highlight {
+      color: #2563eb;
+      font-weight: bold;
+    }
+    .bonus-tier {
+      margin-left: 1rem;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
@@ -96,38 +121,47 @@
 
     <section>
       <h2>Pilih Proyek Investasi</h2>
-      <div class="project-card" data-name="BWM-Penerbitan Novel-15 Hari" data-days="15" data-rate="1">
-        <strong>BWM-Penerbitan Novel-15 Hari</strong><br />
-        Durasi: 15 Hari<br />
-        Suku bunga harian: 1%<br />
-        Bonus Tier:<br />
-        - Rp500.000 - Rp1.999.999 : +2%<br />
-        - Rp2.000.000 - Rp4.999.999 : +3%<br />
-        - Rp5.000.000 ke atas : +4%
-      </div>
-      <div class="project-card" data-name="BWM-Penerbitan Novel-300 Hari" data-days="300" data-rate="3">
-        <strong>BWM-Penerbitan Novel-300 Hari</strong><br />
-        Durasi: 300 Hari<br />
-        Suku bunga harian: 3%<br />
-        Bonus Tier:<br />
-        - Rp500.000 - Rp1.999.999 : +8%<br />
-        - Rp2.000.000 - Rp4.999.999 : +9%<br />
-        - Rp5.000.000 ke atas : +10%
+      <div class="projects-container">
+        <div class="project-card selected" data-name="BWM-Penerbitan Novel-15 Hari" data-days="15" data-rate="1">
+          <strong class="highlight">BWM-Penerbitan Novel-15 Hari</strong><br /><br />
+          <div><strong>Durasi:</strong> 15 Hari</div>
+          <div><strong>Suku bunga harian:</strong> 1%</div>
+          <div><strong>Minimal investasi:</strong> Rp20000</div><br />
+          <div><strong>Bonus Tier:</strong>
+            <div class="bonus-tier">- Rp500000 - Rp1999999 : +2%</div>
+            <div class="bonus-tier">- Rp2000000 - Rp4999999 : +3%</div>
+            <div class="bonus-tier">- Rp5000000 ke atas : +4%</div>
+          </div>
+        </div>
+        <div class="project-card" data-name="BWM-Penerbitan Novel-220 Hari" data-days="220" data-rate="4.5">
+          <strong class="highlight">BWM-Penerbitan Novel-220 Hari</strong><br /><br />
+          <div><strong>Durasi:</strong> 220 Hari</div>
+          <div><strong>Suku bunga harian:</strong> 4.5%</div>
+          <div><strong>Minimal investasi:</strong> Rp100000</div><br />
+          <div><strong>Bonus Tier:</strong>
+            <div class="bonus-tier">- Rp500000 - Rp1999999 : +10%</div>
+            <div class="bonus-tier">- Rp2000000 - Rp4999999 : +15%</div>
+            <div class="bonus-tier">- Rp5000000 - Rp19999999 : +20% + Air Fryer (Rp600000)</div>
+            <div class="bonus-tier">- Rp20000000 ke atas : +30% + Tablet (Rp4500000)</div>
+          </div>
+        </div>
       </div>
     </section>
 
     <section>
       <h2>Masukkan Jumlah Investasi</h2>
       <label for="investmentAmount">Jumlah Investasi (Rp)</label>
-      <input type="number" id="investmentAmount" placeholder="100000" min="100000" />
-      <div class="info-text">Minimal investasi: Rp100.000</div>
+      <input type="number" id="investmentAmount" placeholder="20000" min="20000" step="1" />
+      <div class="info-text" id="minInvestmentText">Minimal investasi: Rp20000</div>
       <button id="calculateBtn">Hitung Keuntungan</button>
     </section>
 
     <section id="resultSection" style="display:none;">
       <h2>Hasil Perhitungan</h2>
       <div class="results">
+        <div><strong>Proyek:</strong> <span id="projectName">-</span></div>
         <div><strong>Bonus:</strong> <span id="bonusAmount">-</span></div>
+        <div id="giftInfo" class="gift-info" style="display:none;"></div>
         <div><strong>Modal Disesuaikan:</strong> <span id="adjustedPrincipal">-</span></div>
         <div><strong>Keuntungan Harian:</strong> <span id="dailyProfit">-</span></div>
         <div><strong>Total Keuntungan:</strong> <span id="totalProfit">-</span></div>
@@ -135,7 +169,7 @@
       </div>
       <div class="message-box" id="successMessage" style="margin-top: 1rem; display: none;">
         🎉 Selamat, Anda telah berhasil membeli proyek senilai <span id="msgInvestment"></span> dengan jangka waktu <span id="msgDays"></span> hari!<br><br>
-        Anda akan menerima bonus sebesar <span id="msgBonus"></span>, dengan penghasilan harian <span id="msgDailyProfit"></span>, dan pada akhir masa investasi, Anda akan mendapatkan total pokok beserta keuntungan sekitar <span id="msgTotalReturn"></span>.<br><br>
+        Anda akan menerima bonus sebesar <span id="msgBonus"></span><span id="msgGift"></span>, dengan penghasilan harian <span id="msgDailyProfit"></span>, dan pada akhir masa investasi, Anda akan mendapatkan total pokok beserta keuntungan sekitar <span id="msgTotalReturn"></span>.<br><br>
         Ini adalah langkah penting menuju kesuksesan Anda sekaligus awal dari pencapaian yang lebih besar di masa depan. Teruslah jaga semangat dan usaha Anda, kami akan mendukung sepenuhnya dan bekerja sama dengan Anda untuk menciptakan masa depan yang lebih baik!<br><br>
         Semangat, kesuksesan sudah ada di depan mata! 🚀✨
       </div>
@@ -147,16 +181,21 @@
       name: "BWM-Penerbitan Novel-15 Hari",
       days: 15,
       dailyRate: 1,
+      minInvestment: 20000,
       bonusTiers: [
-        { min: 500000, max: 1999999, bonus: 2 },
-        { min: 2000000, max: 4999999, bonus: 3 },
-        { min: 5000000, max: Infinity, bonus: 4 },
+        { min: 500000, max: 1999999, bonus: 2, gift: "" },
+        { min: 2000000, max: 4999999, bonus: 3, gift: "" },
+        { min: 5000000, max: Infinity, bonus: 4, gift: "" },
       ],
     };
 
     document.querySelectorAll(".project-card").forEach(card => {
       card.addEventListener("click", () => {
-        document.querySelectorAll(".project-card").forEach(c => c.style.borderColor = "#ddd");
+        document.querySelectorAll(".project-card").forEach(c => {
+          c.classList.remove("selected");
+          c.style.borderColor = "#ddd";
+        });
+        card.classList.add("selected");
         card.style.borderColor = "#2563eb";
 
         selectedProject.name = card.getAttribute("data-name");
@@ -164,64 +203,88 @@
         selectedProject.dailyRate = parseFloat(card.getAttribute("data-rate"));
 
         if(selectedProject.name.includes("15 Hari")){
+          selectedProject.minInvestment = 20000;
           selectedProject.bonusTiers = [
-            { min: 500000, max: 1999999, bonus: 2 },
-            { min: 2000000, max: 4999999, bonus: 3 },
-            { min: 5000000, max: Infinity, bonus: 4 },
+            { min: 500000, max: 1999999, bonus: 2, gift: "" },
+            { min: 2000000, max: 4999999, bonus: 3, gift: "" },
+            { min: 5000000, max: Infinity, bonus: 4, gift: "" },
           ];
+          document.getElementById("minInvestmentText").textContent = "Minimal investasi: Rp20000";
+          document.getElementById("investmentAmount").min = 20000;
+          document.getElementById("investmentAmount").placeholder = "20000";
         } else {
+          selectedProject.minInvestment = 100000;
           selectedProject.bonusTiers = [
-            { min: 500000, max: 1999999, bonus: 8 },
-            { min: 2000000, max: 4999999, bonus: 9 },
-            { min: 5000000, max: Infinity, bonus: 10 },
+            { min: 500000, max: 1999999, bonus: 10, gift: "" },
+            { min: 2000000, max: 4999999, bonus: 15, gift: "" },
+            { min: 5000000, max: 19999999, bonus: 20, gift: " + Air Fryer (Rp600000)" },
+            { min: 20000000, max: Infinity, bonus: 30, gift: " + Tablet (Rp4500000)" },
           ];
+          document.getElementById("minInvestmentText").textContent = "Minimal investasi: Rp100000";
+          document.getElementById("investmentAmount").min = 100000;
+          document.getElementById("investmentAmount").placeholder = "100000";
         }
       });
     });
 
-    document.querySelector(".project-card").style.borderColor = "#2563eb";
-
     function formatCurrency(amount){
-      return "Rp" + amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      // Menghilangkan pemisah ribuan dan menampilkan sebagai bilangan bulat
+      return "Rp" + Math.floor(amount);
     }
 
     document.getElementById("calculateBtn").addEventListener("click", () => {
       const input = document.getElementById("investmentAmount").value;
       const amount = Number(input);
 
-      if (!amount || amount < 100000) {
-        alert("Jumlah investasi minimal Rp100.000");
+      if (!amount || amount < selectedProject.minInvestment) {
+        alert(`Jumlah investasi minimal ${formatCurrency(selectedProject.minInvestment)}`);
         return;
       }
 
       let bonusPercentage = 0;
+      let gift = "";
       for(const tier of selectedProject.bonusTiers){
         if(amount >= tier.min && amount <= tier.max){
           bonusPercentage = tier.bonus;
+          gift = tier.gift;
           break;
         }
       }
+      
       const bonusAmount = amount * (bonusPercentage / 100);
       const adjustedPrincipal = amount + bonusAmount;
       const dailyProfit = adjustedPrincipal * (selectedProject.dailyRate / 100);
       const totalProfit = dailyProfit * selectedProject.days;
       const finalAmount = adjustedPrincipal + totalProfit;
 
-      document.getElementById("bonusAmount").textContent = formatCurrency(Math.round(bonusAmount));
-      document.getElementById("adjustedPrincipal").textContent = formatCurrency(Math.round(adjustedPrincipal));
-      document.getElementById("dailyProfit").textContent = formatCurrency(Math.round(dailyProfit));
-      document.getElementById("totalProfit").textContent = formatCurrency(Math.round(totalProfit));
-      document.getElementById("finalAmount").textContent = formatCurrency(Math.round(finalAmount));
+      document.getElementById("projectName").textContent = selectedProject.name;
+      document.getElementById("bonusAmount").textContent = formatCurrency(bonusAmount) + " (" + bonusPercentage + "%)";
+      
+      if(gift) {
+        document.getElementById("giftInfo").style.display = "block";
+        document.getElementById("giftInfo").textContent = "Hadiah: " + gift;
+      } else {
+        document.getElementById("giftInfo").style.display = "none";
+      }
+      
+      document.getElementById("adjustedPrincipal").textContent = formatCurrency(adjustedPrincipal);
+      document.getElementById("dailyProfit").textContent = formatCurrency(dailyProfit);
+      document.getElementById("totalProfit").textContent = formatCurrency(totalProfit);
+      document.getElementById("finalAmount").textContent = formatCurrency(finalAmount);
 
       // Tampilkan pesan sukses dengan nilai dinamis
       document.getElementById("msgInvestment").textContent = formatCurrency(amount);
       document.getElementById("msgDays").textContent = selectedProject.days;
-      document.getElementById("msgBonus").textContent = formatCurrency(Math.round(bonusAmount)) + " (" + bonusPercentage + "%)";
-      document.getElementById("msgDailyProfit").textContent = formatCurrency(Math.round(dailyProfit));
-      document.getElementById("msgTotalReturn").textContent = formatCurrency(Math.round(finalAmount));
+      document.getElementById("msgBonus").textContent = formatCurrency(bonusAmount) + " (" + bonusPercentage + "%)";
+      document.getElementById("msgGift").textContent = gift;
+      document.getElementById("msgDailyProfit").textContent = formatCurrency(dailyProfit);
+      document.getElementById("msgTotalReturn").textContent = formatCurrency(finalAmount);
 
       document.getElementById("resultSection").style.display = "block";
       document.getElementById("successMessage").style.display = "block";
+      
+      // Scroll to results
+      document.getElementById("resultSection").scrollIntoView({ behavior: 'smooth' });
     });
   </script>
 </body>
