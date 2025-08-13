@@ -1,291 +1,521 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>懒人使用器</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 1rem;
-      background: #f9fafb;
-      color: #333;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    header, section {
-      margin-bottom: 2rem;
-    }
-    h1 {
-      font-size: 2rem;
-      color: #2563eb;
-      margin-bottom: 0.3rem;
-    }
-    .projects-container {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-    .project-card {
-      border: 1px solid #ddd;
-      padding: 1rem;
-      flex: 1;
-      cursor: pointer;
-      border-radius: 6px;
-      background: #fff;
-      transition: all 0.2s;
-      min-height: 250px;
-    }
-    .project-card:hover {
-      box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
-      transform: translateY(-2px);
-    }
-    .project-card.selected {
-      border-color: #2563eb;
-      background-color: #f0f7ff;
-    }
-    label {
-      font-weight: bold;
-      display: block;
-      margin-bottom: 0.3rem;
-    }
-    input[type="text"], input[type="number"] {
-      width: 100%;
-      padding: 0.5rem;
-      font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-      margin-bottom: 0.5rem;
-    }
-    .info-text {
-      font-size: 0.85rem;
-      color: #666;
-      margin-bottom: 1rem;
-    }
-    .results {
-      background: #e0f2fe;
-      padding: 1rem;
-      border-radius: 6px;
-    }
-    .results div {
-      margin-bottom: 0.5rem;
-    }
-    button {
-      background: #2563eb;
-      color: white;
-      border: none;
-      padding: 0.7rem 1.2rem;
-      font-size: 1rem;
-      cursor: pointer;
-      border-radius: 4px;
-      margin-top: 1rem;
-      transition: background 0.2s;
-    }
-    button:hover {
-      background: #1e40af;
-    }
-    .message-box {
-      background: #fff9db;
-      border: 1px solid #fbbf24;
-      padding: 1rem;
-      border-radius: 6px;
-      color: #7c5100;
-      font-weight: bold;
-      margin-top: 1rem;
-      font-size: 1rem;
-    }
-    .gift-info {
-      color: #dc2626;
-      font-weight: bold;
-      margin-top: 0.5rem;
-    }
-    .highlight {
-      color: #2563eb;
-      font-weight: bold;
-    }
-    .bonus-tier {
-      margin-left: 1rem;
-      font-size: 0.9rem;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新能源投资计算器 - 170天计划</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2ecc71;
+            --primary-dark: #27ae60;
+            --secondary: #3498db;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --accent: #e74c3c;
+            --success: #2ecc71;
+            --warning: #f39c12;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+        }
+        
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .ribbon {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            font-size: 14px;
+            font-weight: 600;
+            transform: translateY(-50%) rotate(15deg);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 25px;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .calculator-section {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 20px;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            color: var(--primary);
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
+        }
+        
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+        
+        .result-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--primary);
+            display: none;
+        }
+        
+        .result-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .result-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .result-label {
+            font-weight: 600;
+        }
+        
+        .result-value {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .bonus-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--secondary);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .congratulation-card {
+            background: linear-gradient(to right, #f8f9fa, #e9f7fe);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--secondary);
+            display: none;
+        }
+        
+        .congratulation-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .congratulation-message {
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        
+        .emoji {
+            font-size: 1.2em;
+        }
+        
+        .copy-btn {
+            background: var(--secondary);
+            margin-top: 15px;
+        }
+        
+        .copy-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .gift-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Kalkulator Investasi BWM</h1>
-      <p>Hitung potensi keuntungan investasi novel publishing Anda</p>
-    </header>
-
-    <section>
-      <h2>Pilih Proyek Investasi</h2>
-      <div class="projects-container">
-        <div class="project-card selected" data-name="BWM-Penerbitan Novel-15 Hari" data-days="15" data-rate="1">
-          <strong class="highlight">BWM-Penerbitan Novel-15 Hari</strong><br /><br />
-          <div><strong>Durasi:</strong> 15 Hari</div>
-          <div><strong>Suku bunga harian:</strong> 1%</div>
-          <div><strong>Minimal investasi:</strong> Rp20000</div><br />
-          <div><strong>Bonus Tier:</strong>
-            <div class="bonus-tier">- Rp500000 - Rp1999999 : +2%</div>
-            <div class="bonus-tier">- Rp2000000 - Rp4999999 : +3%</div>
-            <div class="bonus-tier">- Rp5000000 ke atas : +4%</div>
-          </div>
+    <div class="container">
+        <header>
+            <div class="ribbon">限时优惠!</div>
+            <h1>新能源投资170天计划</h1>
+            <p>💎 每日回报5% | 🎁 团队奖金 | 🌱 未来财富</p>
+        </header>
+        
+        <div class="content">
+            <div class="calculator-section">
+                <h2 class="section-title">
+                    <span>📈 投资计算器</span>
+                </h2>
+                
+                <div class="form-group">
+                    <label for="investment">投资金额 (Rp)</label>
+                    <input type="number" id="investment" placeholder="例如: 1000000">
+                </div>
+                
+                <button onclick="calculate()">计算收益</button>
+                
+                <div id="result" class="result-card">
+                    <h3 class="result-title">📊 计算结果</h3>
+                    <div class="result-item">
+                        <span class="result-label">投资本金:</span>
+                        <span class="result-value" id="original-investment">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">额外奖金:</span>
+                        <span class="result-value" id="bonus">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">总投资额:</span>
+                        <span class="result-value" id="total-investment">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">每日收益:</span>
+                        <span class="result-value" id="daily-earnings">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">170天总计:</span>
+                        <span class="result-value" id="total-earnings">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">最终金额:</span>
+                        <span class="result-value" id="final-amount">Rp0</span>
+                    </div>
+                    <p id="gift-message" style="margin-top: 15px; color: var(--accent); font-weight: 600;"></p>
+                </div>
+                
+                <div id="congratulation" class="congratulation-card">
+                    <h3 class="congratulation-title">🎉 Selamat!</h3>
+                    <div id="congratulation-message" class="congratulation-message"></div>
+                    <button class="copy-btn" onclick="copyCongratulation()">Salin Pesan</button>
+                </div>
+            </div>
+            
+            <div class="calculator-section">
+                <h2 class="section-title">
+                    <span>🎁 投资奖金</span>
+                </h2>
+                
+                <div class="bonus-card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>投资金额</th>
+                                <th>奖金</th>
+                                <th>礼物</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>首次投资</td>
+                                <td>Rp10,000</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Rp200,000-499,000</td>
+                                <td>+15%</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Rp500,000-1,999,000</td>
+                                <td>+20%</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Rp2,000,000-4,999,000</td>
+                                <td>+25%</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Rp5,000,000-19,999,000</td>
+                                <td>+30%</td>
+                                <td>Sepeda</td>
+                            </tr>
+                            <tr>
+                                <td>>Rp20,000,000</td>
+                                <td>+35%</td>
+                                <td>Kulkas</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="bonus-card" style="margin-top: 20px;">
+                    <h3 class="section-title">💡 团队奖金</h3>
+                    <p style="font-size: 14px; margin-top: 10px;">
+                        <strong>一级团队:</strong> 10% 收益<br>
+                        <strong>二级团队:</strong> 5% 收益<br>
+                        <strong>三级团队:</strong> 2% 收益
+                    </p>
+                </div>
+                
+                <div class="bonus-card" style="margin-top: 20px;">
+                    <h3 class="section-title">📊 计算示例</h3>
+                    <p style="font-size: 14px; margin-top: 10px;">
+                        <strong>投资:</strong> Rp2,000,000 + 奖金 Rp500,000 = Rp2,500,000<br>
+                        <strong>每日:</strong> Rp2,500,000 × 5% = Rp125,000/天<br>
+                        <strong>170天:</strong> Rp125,000 × 170 = Rp21,250,000<br>
+                        <strong>总计:</strong> Rp2,500,000 + Rp21,250,000 = Rp23,750,000
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="project-card" data-name="BWM-Penerbitan Novel-220 Hari" data-days="220" data-rate="4.5">
-          <strong class="highlight">BWM-Penerbitan Novel-220 Hari</strong><br /><br />
-          <div><strong>Durasi:</strong> 220 Hari</div>
-          <div><strong>Suku bunga harian:</strong> 4.5%</div>
-          <div><strong>Minimal investasi:</strong> Rp100000</div><br />
-          <div><strong>Bonus Tier:</strong>
-            <div class="bonus-tier">- Rp500000 - Rp1999999 : +10%</div>
-            <div class="bonus-tier">- Rp2000000 - Rp4999999 : +15%</div>
-            <div class="bonus-tier">- Rp5000000 - Rp19999999 : +20% + Air Fryer (Rp600000)</div>
-            <div class="bonus-tier">- Rp20000000 ke atas : +30% + Tablet (Rp4500000)</div>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div>
 
-    <section>
-      <h2>Masukkan Jumlah Investasi</h2>
-      <label for="investmentAmount">Jumlah Investasi (Rp)</label>
-      <input type="number" id="investmentAmount" placeholder="20000" min="20000" step="1" />
-      <div class="info-text" id="minInvestmentText">Minimal investasi: Rp20000</div>
-      <button id="calculateBtn">Hitung Keuntungan</button>
-    </section>
-
-    <section id="resultSection" style="display:none;">
-      <h2>Hasil Perhitungan</h2>
-      <div class="results">
-        <div><strong>Proyek:</strong> <span id="projectName">-</span></div>
-        <div><strong>Bonus:</strong> <span id="bonusAmount">-</span></div>
-        <div id="giftInfo" class="gift-info" style="display:none;"></div>
-        <div><strong>Modal Disesuaikan:</strong> <span id="adjustedPrincipal">-</span></div>
-        <div><strong>Keuntungan Harian:</strong> <span id="dailyProfit">-</span></div>
-        <div><strong>Total Keuntungan:</strong> <span id="totalProfit">-</span></div>
-        <div><strong>Total Pengembalian:</strong> <span id="finalAmount">-</span></div>
-      </div>
-      <div class="message-box" id="successMessage" style="margin-top: 1rem; display: none;">
-        🎉 Selamat, Anda telah berhasil membeli proyek senilai <span id="msgInvestment"></span> dengan jangka waktu <span id="msgDays"></span> hari!<br><br>
-        Anda akan menerima bonus sebesar <span id="msgBonus"></span><span id="msgGift"></span>, dengan penghasilan harian <span id="msgDailyProfit"></span>, dan pada akhir masa investasi, Anda akan mendapatkan total pokok beserta keuntungan sekitar <span id="msgTotalReturn"></span>.<br><br>
-        Ini adalah langkah penting menuju kesuksesan Anda sekaligus awal dari pencapaian yang lebih besar di masa depan. Teruslah jaga semangat dan usaha Anda, kami akan mendukung sepenuhnya dan bekerja sama dengan Anda untuk menciptakan masa depan yang lebih baik!<br><br>
-        Semangat, kesuksesan sudah ada di depan mata! 🚀✨
-      </div>
-    </section>
-  </div>
-
-  <script>
-    let selectedProject = {
-      name: "BWM-Penerbitan Novel-15 Hari",
-      days: 15,
-      dailyRate: 1,
-      minInvestment: 20000,
-      bonusTiers: [
-        { min: 500000, max: 1999999, bonus: 2, gift: "" },
-        { min: 2000000, max: 4999999, bonus: 3, gift: "" },
-        { min: 5000000, max: Infinity, bonus: 4, gift: "" },
-      ],
-    };
-
-    document.querySelectorAll(".project-card").forEach(card => {
-      card.addEventListener("click", () => {
-        document.querySelectorAll(".project-card").forEach(c => {
-          c.classList.remove("selected");
-          c.style.borderColor = "#ddd";
-        });
-        card.classList.add("selected");
-        card.style.borderColor = "#2563eb";
-
-        selectedProject.name = card.getAttribute("data-name");
-        selectedProject.days = parseInt(card.getAttribute("data-days"));
-        selectedProject.dailyRate = parseFloat(card.getAttribute("data-rate"));
-
-        if(selectedProject.name.includes("15 Hari")){
-          selectedProject.minInvestment = 20000;
-          selectedProject.bonusTiers = [
-            { min: 500000, max: 1999999, bonus: 2, gift: "" },
-            { min: 2000000, max: 4999999, bonus: 3, gift: "" },
-            { min: 5000000, max: Infinity, bonus: 4, gift: "" },
-          ];
-          document.getElementById("minInvestmentText").textContent = "Minimal investasi: Rp20000";
-          document.getElementById("investmentAmount").min = 20000;
-          document.getElementById("investmentAmount").placeholder = "20000";
-        } else {
-          selectedProject.minInvestment = 100000;
-          selectedProject.bonusTiers = [
-            { min: 500000, max: 1999999, bonus: 10, gift: "" },
-            { min: 2000000, max: 4999999, bonus: 15, gift: "" },
-            { min: 5000000, max: 19999999, bonus: 20, gift: " + Air Fryer (Rp600000)" },
-            { min: 20000000, max: Infinity, bonus: 30, gift: " + Tablet (Rp4500000)" },
-          ];
-          document.getElementById("minInvestmentText").textContent = "Minimal investasi: Rp100000";
-          document.getElementById("investmentAmount").min = 100000;
-          document.getElementById("investmentAmount").placeholder = "100000";
+    <script>
+        function calculate() {
+            // Get input value
+            const investment = parseFloat(document.getElementById('investment').value);
+            
+            if (isNaN(investment) || investment < 100000) {
+                alert("最低投资Rp100,000");
+                return;
+            }
+            
+            // Calculate bonus with rounding
+            let bonus = 0;
+            let gift = "";
+            
+            if (investment >= 20000000) {
+                bonus = Math.round(investment * 0.35 / 1000) * 1000; // Round to nearest 1000
+                gift = "Kulkas (senilai Rp4,500,000)";
+            } else if (investment >= 5000000) {
+                bonus = Math.round(investment * 0.30 / 1000) * 1000;
+                gift = "Sepeda (senilai Rp1,000,000)";
+            } else if (investment >= 2000000) {
+                bonus = Math.round(investment * 0.25 / 1000) * 1000;
+            } else if (investment >= 500000) {
+                bonus = Math.round(investment * 0.20 / 1000) * 1000;
+            } else if (investment >= 200000) {
+                bonus = Math.round(investment * 0.15 / 1000) * 1000;
+            } else {
+                bonus = 10000; // First-time bonus
+            }
+            
+            // Calculate totals with rounding
+            const totalInvestment = investment + bonus;
+            const dailyEarnings = Math.round(totalInvestment * 0.05 / 100) * 100; // Round to nearest 100
+            const totalEarnings = Math.round(dailyEarnings * 170 / 1000) * 1000; // Round to nearest 1000
+            const finalAmount = totalInvestment + totalEarnings;
+            
+            // Display results
+            document.getElementById('original-investment').textContent = formatCurrency(investment);
+            document.getElementById('bonus').textContent = formatCurrency(bonus);
+            document.getElementById('total-investment').textContent = formatCurrency(totalInvestment);
+            document.getElementById('daily-earnings').textContent = formatCurrency(dailyEarnings);
+            document.getElementById('total-earnings').textContent = formatCurrency(totalEarnings);
+            document.getElementById('final-amount').textContent = formatCurrency(finalAmount);
+            
+            if (gift) {
+                document.getElementById('gift-message').innerHTML = `🎁 您将获得: <strong>${gift}</strong>`;
+            } else {
+                document.getElementById('gift-message').innerHTML = "";
+            }
+            
+            document.getElementById('result').style.display = 'block';
+            
+            // Generate congratulation message (in Indonesian)
+            generateCongratulation(investment, bonus, totalInvestment, totalEarnings, finalAmount, gift);
+            document.getElementById('congratulation').style.display = 'block';
+            
+            // Scroll to results
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
         }
-      });
-    });
-
-    function formatCurrency(amount){
-      // Menghilangkan pemisah ribuan dan menampilkan sebagai bilangan bulat
-      return "Rp" + Math.floor(amount);
-    }
-
-    document.getElementById("calculateBtn").addEventListener("click", () => {
-      const input = document.getElementById("investmentAmount").value;
-      const amount = Number(input);
-
-      if (!amount || amount < selectedProject.minInvestment) {
-        alert(`Jumlah investasi minimal ${formatCurrency(selectedProject.minInvestment)}`);
-        return;
-      }
-
-      let bonusPercentage = 0;
-      let gift = "";
-      for(const tier of selectedProject.bonusTiers){
-        if(amount >= tier.min && amount <= tier.max){
-          bonusPercentage = tier.bonus;
-          gift = tier.gift;
-          break;
+        
+        function generateCongratulation(investment, bonus, totalInvestment, totalEarnings, finalAmount, gift) {
+            let giftMessage = "";
+            
+            if (gift) {
+                giftMessage = `
+                    <p><span class="emoji">🎁</span> <strong>Bonus Spesial:</strong> Anda juga berhak mendapatkan hadiah ${gift} sebagai apresiasi atas investasi Anda!</p>
+                `;
+            }
+            
+            const message = `
+                <p><span class="emoji">🎉</span> <strong>Selamat atas keberhasilan investasi Anda dalam Rencana 170 Hari Energi Baru!</strong> <span class="emoji">🎉</span></p>
+                
+                <p>Pokok investasi Anda sebesar <strong>${formatCurrency(investment)}</strong> + bonus <strong>${formatCurrency(bonus)}</strong>,<br>
+                total <strong>${formatCurrency(totalInvestment)}</strong> telah diinvestasikan sepenuhnya dalam proyek ini!</p>
+                
+                ${giftMessage}
+                
+                <p><span class="emoji">🚀</span> Dengan imbal hasil harian yang stabil sebesar 5%, setelah 170 hari, Anda akan mendapatkan hingga:</p>
+                
+                <p><span class="emoji">💰</span> <strong>Imbal hasil kumulatif sebesar ${formatCurrency(totalEarnings)}!</strong><br>
+                <span class="emoji">💎</span> <strong>Total imbal hasil akhir mencapai ${formatCurrency(finalAmount)}!</strong></p>
+                
+                <p>Anda juga berhak mendapatkan bonus tim 10%/5%/2% dari investasi anggota tim Anda!</p>
+                
+                <p>Ini bukan hanya pilihan investasi keuangan yang baik, tetapi juga langkah penting menuju kebebasan finansial dan masa depan yang hijau! <span class="emoji">🌱</span></p>
+                
+                <p>Selamat sekali lagi atas dimulainya perjalanan Anda menuju hasil tinggi. Semoga Anda menikmati masa depan yang cerah dan hasil yang melimpah! <span class="emoji">🎊💼</span></p>
+            `;
+            
+            document.getElementById('congratulation-message').innerHTML = message;
         }
-      }
-      
-      const bonusAmount = amount * (bonusPercentage / 100);
-      const adjustedPrincipal = amount + bonusAmount;
-      const dailyProfit = adjustedPrincipal * (selectedProject.dailyRate / 100);
-      const totalProfit = dailyProfit * selectedProject.days;
-      const finalAmount = adjustedPrincipal + totalProfit;
-
-      document.getElementById("projectName").textContent = selectedProject.name;
-      document.getElementById("bonusAmount").textContent = formatCurrency(bonusAmount) + " (" + bonusPercentage + "%)";
-      
-      if(gift) {
-        document.getElementById("giftInfo").style.display = "block";
-        document.getElementById("giftInfo").textContent = "Hadiah: " + gift;
-      } else {
-        document.getElementById("giftInfo").style.display = "none";
-      }
-      
-      document.getElementById("adjustedPrincipal").textContent = formatCurrency(adjustedPrincipal);
-      document.getElementById("dailyProfit").textContent = formatCurrency(dailyProfit);
-      document.getElementById("totalProfit").textContent = formatCurrency(totalProfit);
-      document.getElementById("finalAmount").textContent = formatCurrency(finalAmount);
-
-      // Tampilkan pesan sukses dengan nilai dinamis
-      document.getElementById("msgInvestment").textContent = formatCurrency(amount);
-      document.getElementById("msgDays").textContent = selectedProject.days;
-      document.getElementById("msgBonus").textContent = formatCurrency(bonusAmount) + " (" + bonusPercentage + "%)";
-      document.getElementById("msgGift").textContent = gift;
-      document.getElementById("msgDailyProfit").textContent = formatCurrency(dailyProfit);
-      document.getElementById("msgTotalReturn").textContent = formatCurrency(finalAmount);
-
-      document.getElementById("resultSection").style.display = "block";
-      document.getElementById("successMessage").style.display = "block";
-      
-      // Scroll to results
-      document.getElementById("resultSection").scrollIntoView({ behavior: 'smooth' });
-    });
-  </script>
+        
+        function copyCongratulation() {
+            const congratulation = document.getElementById('congratulation-message');
+            const range = document.createRange();
+            range.selectNode(congratulation);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+            
+            // Show feedback
+            const btn = document.querySelector('.copy-btn');
+            btn.textContent = '已复制!';
+            setTimeout(() => {
+                btn.textContent = '复制信息';
+            }, 2000);
+        }
+        
+        function formatCurrency(amount) {
+            return 'Rp' + amount.toLocaleString('id-ID');
+        }
+    </script>
 </body>
 </html>
