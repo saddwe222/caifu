@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>新能源投资计算器 - 170天计划</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
             --primary: #2ecc71;
@@ -15,6 +16,7 @@
             --accent: #e74c3c;
             --success: #2ecc71;
             --warning: #f39c12;
+            --transition: all 0.3s ease;
         }
         
         * {
@@ -39,6 +41,7 @@
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             overflow: hidden;
+            transition: var(--transition);
         }
         
         header {
@@ -50,13 +53,13 @@
         }
         
         header h1 {
-            font-size: 28px;
+            font-size: clamp(22px, 4vw, 28px);
             margin-bottom: 10px;
             font-weight: 700;
         }
         
         header p {
-            font-size: 16px;
+            font-size: clamp(14px, 2vw, 16px);
             opacity: 0.9;
         }
         
@@ -71,6 +74,7 @@
             font-weight: 600;
             transform: translateY(-50%) rotate(15deg);
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1;
         }
         
         .content {
@@ -90,10 +94,11 @@
             background: var(--light);
             border-radius: 10px;
             padding: 20px;
+            transition: var(--transition);
         }
         
         .section-title {
-            font-size: 20px;
+            font-size: clamp(18px, 2vw, 20px);
             margin-bottom: 15px;
             color: var(--dark);
             display: flex;
@@ -107,6 +112,7 @@
         
         .form-group {
             margin-bottom: 15px;
+            position: relative;
         }
         
         label {
@@ -122,13 +128,29 @@
             border: 2px solid #ddd;
             border-radius: 8px;
             font-size: 16px;
-            transition: all 0.3s;
+            transition: var(--transition);
         }
         
         input:focus {
             border-color: var(--primary);
             outline: none;
             box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
+        }
+        
+        .input-group {
+            position: relative;
+        }
+        
+        .input-group span {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+        
+        .input-group input {
+            padding-left: 35px;
         }
         
         button {
@@ -141,14 +163,25 @@
             font-size: 16px;
             font-weight: 600;
             width: 100%;
-            transition: all 0.3s;
+            transition: var(--transition);
             margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
         
         button:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+        
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
         
         .result-card {
@@ -158,7 +191,15 @@
             margin-top: 20px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             border-left: 4px solid var(--primary);
-            display: none;
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .result-card.show {
+            opacity: 1;
+            height: auto;
         }
         
         .result-title {
@@ -231,7 +272,15 @@
             margin-top: 20px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             border-left: 4px solid var(--secondary);
-            display: none;
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .congratulation-card.show {
+            opacity: 1;
+            height: auto;
         }
         
         .congratulation-title {
@@ -274,6 +323,64 @@
             margin-left: 5px;
             vertical-align: middle;
         }
+        
+        .error-message {
+            color: var(--accent);
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+        
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 12px;
+            font-weight: normal;
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .highlight {
+            background-color: #fffde7;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
     </style>
 </head>
 <body>
@@ -292,10 +399,17 @@
                 
                 <div class="form-group">
                     <label for="investment">投资金额 (Rp)</label>
-                    <input type="number" id="investment" placeholder="例如: 1000000">
+                    <div class="input-group">
+                        <span>Rp</span>
+                        <input type="number" id="investment" placeholder="例如: 1000000" min="100000" step="10000">
+                    </div>
+                    <div class="error-message" id="investment-error">最低投资金额为Rp100,000</div>
                 </div>
                 
-                <button onclick="calculate()">计算收益</button>
+                <button id="calculate-btn" onclick="calculate()">
+                    <span id="calculate-text">计算收益</span>
+                    <span id="calculate-loader" class="loading" style="display: none;"></span>
+                </button>
                 
                 <div id="result" class="result-card">
                     <h3 class="result-title">📊 计算结果</h3>
@@ -329,13 +443,19 @@
                 <div id="congratulation" class="congratulation-card">
                     <h3 class="congratulation-title">🎉 Selamat!</h3>
                     <div id="congratulation-message" class="congratulation-message"></div>
-                    <button class="copy-btn" onclick="copyCongratulation()">Salin Pesan</button>
+                    <button class="copy-btn" onclick="copyCongratulation()">
+                        <i class="fas fa-copy"></i> Salin Pesan
+                    </button>
                 </div>
             </div>
             
             <div class="calculator-section">
                 <h2 class="section-title">
                     <span>🎁 投资奖金</span>
+                    <div class="tooltip">
+                        <i class="fas fa-info-circle" style="color: var(--secondary);"></i>
+                        <span class="tooltiptext">奖金将直接加入您的投资本金，享受每日5%的收益</span>
+                    </div>
                 </h2>
                 
                 <div class="bonus-card">
@@ -405,32 +525,90 @@
     </div>
 
     <script>
+        // 页面加载时从本地存储恢复数据
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedInvestment = localStorage.getItem('lastInvestment');
+            if (savedInvestment) {
+                document.getElementById('investment').value = savedInvestment;
+            }
+            
+            // 添加输入验证
+            document.getElementById('investment').addEventListener('input', function() {
+                const value = parseFloat(this.value);
+                const errorElement = document.getElementById('investment-error');
+                
+                if (isNaN(value) || value < 100000) {
+                    errorElement.style.display = 'block';
+                    document.getElementById('calculate-btn').disabled = true;
+                } else {
+                    errorElement.style.display = 'none';
+                    document.getElementById('calculate-btn').disabled = false;
+                }
+            });
+        });
+        
         function calculate() {
+            // 显示加载状态
+            const calculateBtn = document.getElementById('calculate-btn');
+            const calculateText = document.getElementById('calculate-text');
+            const calculateLoader = document.getElementById('calculate-loader');
+            
+            calculateText.textContent = '计算中...';
+            calculateLoader.style.display = 'inline-block';
+            calculateBtn.disabled = true;
+            
+            // 模拟计算延迟
+            setTimeout(() => {
+                performCalculation();
+                
+                // 恢复按钮状态
+                calculateText.textContent = '计算收益';
+                calculateLoader.style.display = 'none';
+                calculateBtn.disabled = false;
+            }, 500);
+        }
+        
+        function performCalculation() {
             // Get input value
             const investment = parseFloat(document.getElementById('investment').value);
             
-            if (isNaN(investment) || investment < 100000) {
-                alert("最低投资Rp100,000");
+            // 保存到本地存储
+            localStorage.setItem('lastInvestment', investment);
+            
+            if (isNaN(investment) {
+                showError("请输入有效的投资金额");
+                return;
+            }
+            
+            if (investment < 100000) {
+                showError("最低投资Rp100,000");
                 return;
             }
             
             // Calculate bonus with rounding
             let bonus = 0;
             let gift = "";
+            let bonusPercentage = "";
             
             if (investment >= 20000000) {
+                bonusPercentage = "35%";
                 bonus = Math.round(investment * 0.35 / 1000) * 1000; // Round to nearest 1000
                 gift = "Kulkas (senilai Rp4,500,000)";
             } else if (investment >= 5000000) {
+                bonusPercentage = "30%";
                 bonus = Math.round(investment * 0.30 / 1000) * 1000;
                 gift = "Sepeda (senilai Rp1,000,000)";
             } else if (investment >= 2000000) {
+                bonusPercentage = "25%";
                 bonus = Math.round(investment * 0.25 / 1000) * 1000;
             } else if (investment >= 500000) {
+                bonusPercentage = "20%";
                 bonus = Math.round(investment * 0.20 / 1000) * 1000;
             } else if (investment >= 200000) {
+                bonusPercentage = "15%";
                 bonus = Math.round(investment * 0.15 / 1000) * 1000;
             } else {
+                bonusPercentage = "固定";
                 bonus = 10000; // First-time bonus
             }
             
@@ -442,7 +620,7 @@
             
             // Display results
             document.getElementById('original-investment').textContent = formatCurrency(investment);
-            document.getElementById('bonus').textContent = formatCurrency(bonus);
+            document.getElementById('bonus').textContent = `${formatCurrency(bonus)} (${bonusPercentage})`;
             document.getElementById('total-investment').textContent = formatCurrency(totalInvestment);
             document.getElementById('daily-earnings').textContent = formatCurrency(dailyEarnings);
             document.getElementById('total-earnings').textContent = formatCurrency(totalEarnings);
@@ -454,22 +632,23 @@
                 document.getElementById('gift-message').innerHTML = "";
             }
             
-            document.getElementById('result').style.display = 'block';
+            // 显示结果卡片
+            document.getElementById('result').classList.add('show');
             
             // Generate congratulation message (in Indonesian)
-            generateCongratulation(investment, bonus, totalInvestment, totalEarnings, finalAmount, gift);
-            document.getElementById('congratulation').style.display = 'block';
+            generateCongratulation(investment, bonus, totalInvestment, dailyEarnings, totalEarnings, finalAmount, gift);
+            document.getElementById('congratulation').classList.add('show');
             
             // Scroll to results
             document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
         }
         
-        function generateCongratulation(investment, bonus, totalInvestment, totalEarnings, finalAmount, gift) {
+        function generateCongratulation(investment, bonus, totalInvestment, dailyEarnings, totalEarnings, finalAmount, gift) {
             let giftMessage = "";
             
             if (gift) {
                 giftMessage = `
-                    <p><span class="emoji">🎁</span> <strong>Bonus Spesial:</strong> Anda juga berhak mendapatkan hadiah ${gift} sebagai apresiasi atas investasi Anda!</p>
+                    <p><span class="emoji">🎁</span> <strong>Bonus Spesial:</strong> Anda juga berhak mendapatkan hadiah <span class="highlight">${gift}</span> sebagai apresiasi atas investasi Anda!</p>
                 `;
             }
             
@@ -502,21 +681,42 @@
             range.selectNode(congratulation);
             window.getSelection().removeAllRanges();
             window.getSelection().addRange(range);
-            document.execCommand('copy');
-            window.getSelection().removeAllRanges();
             
-            // Show feedback
-            const btn = document.querySelector('.copy-btn');
-            btn.textContent = '已复制!';
-            setTimeout(() => {
-                btn.textContent = '复制信息';
-            }, 2000);
+            try {
+                const successful = document.execCommand('copy');
+                const btn = document.querySelector('.copy-btn');
+                
+                if (successful) {
+                    btn.innerHTML = '<i class="fas fa-check"></i> 已复制!';
+                    setTimeout(() => {
+                        btn.innerHTML = '<i class="fas fa-copy"></i> Salin Pesan';
+                    }, 2000);
+                } else {
+                    btn.innerHTML = '<i class="fas fa-times"></i> 复制失败';
+                    setTimeout(() => {
+                        btn.innerHTML = '<i class="fas fa-copy"></i> Salin Pesan';
+                    }, 2000);
+                }
+            } catch (err) {
+                console.error('复制失败:', err);
+            }
+            
+            window.getSelection().removeAllRanges();
         }
         
         function formatCurrency(amount) {
             return 'Rp' + amount.toLocaleString('id-ID');
         }
+        
+        function showError(message) {
+            const errorElement = document.getElementById('investment-error');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+            
+            // 隐藏结果卡片
+            document.getElementById('result').classList.remove('show');
+            document.getElementById('congratulation').classList.remove('show');
+        }
     </script>
 </body>
 </html>
-
