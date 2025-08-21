@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyek Investasi: Manfaat khusus Hari Nasional-180 hari</title>
+    <title>Proyek Investasi BWM</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #2ecc71;
-            --primary-dark: #27ae60;
-            --secondary: #3498db;
-            --dark: #2c3e50;
-            --light: #ecf0f1;
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --secondary: #9b59b6;
+            --secondary-dark: #8e44ad;
             --accent: #e74c3c;
             --success: #2ecc71;
             --warning: #f39c12;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
         }
         
         * {
@@ -33,7 +34,7 @@
         }
         
         .container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
             background: white;
             border-radius: 15px;
@@ -73,16 +74,49 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
         
-        .content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+        .tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--dark);
+            transition: all 0.3s;
+        }
+        
+        .tab-btn.active {
+            background: white;
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
             padding: 25px;
         }
         
+        .tab-content.active {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
         @media (max-width: 768px) {
-            .content {
+            .tab-content.active {
                 grid-template-columns: 1fr;
+            }
+            
+            .tabs {
+                flex-direction: column;
             }
         }
         
@@ -116,7 +150,7 @@
             font-size: 14px;
         }
         
-        input {
+        input, select {
             width: 100%;
             padding: 12px 15px;
             border: 2px solid #ddd;
@@ -125,10 +159,10 @@
             transition: all 0.3s;
         }
         
-        input:focus {
+        input:focus, select:focus {
             border-color: var(--primary);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
         }
         
         button {
@@ -148,7 +182,7 @@
         button:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
         }
         
         .result-card {
@@ -258,9 +292,9 @@
         }
         
         .copy-btn:hover {
-            background: #2980b9;
+            background: var(--secondary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+            box-shadow: 0 5px 15px rgba(155, 89, 182, 0.3);
         }
         
         .gift-badge {
@@ -274,62 +308,74 @@
             margin-left: 5px;
             vertical-align: middle;
         }
+        
+        .project-info {
+            background-color: #fff8e1;
+            border-left: 4px solid var(--warning);
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <div class="ribbon">限时优惠!</div>
-            <h1>Proyek Investasi: Manfaat khusus Hari Nasional-180 hari</h1>
-            <p>💎 Bunga harian 8% | 🎁 Bonus tim | 🚀 Kesempatan setahun sekali</p>
+            <h1>Proyek Investasi BWM</h1>
+            <p>💎 Berbagai pilihan proyek | 🎁 Bonus tim | 🚀 Kesempatan investasi menguntungkan</p>
         </header>
         
-        <div class="content">
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab(0)">Penerbitan Novel-6 Hari</button>
+            <button class="tab-btn" onclick="switchTab(1)">Penerbitan Novel-13 Hari</button>
+            <button class="tab-btn" onclick="switchTab(2)">5G & IoT-150 Hari</button>
+        </div>
+        
+        <!-- Tab 1: Penerbitan Novel-6 Hari -->
+        <div class="tab-content active">
             <div class="calculator-section">
                 <h2 class="section-title">
                     <span>📈 Kalkulator Investasi</span>
                 </h2>
                 
                 <div class="form-group">
-                    <label for="investment">Jumlah Investasi (Rp)</label>
-                    <input type="number" id="investment" placeholder="例如: 1000000">
+                    <label for="investment1">Jumlah Investasi (Rp)</label>
+                    <input type="number" id="investment1" placeholder="例如: 1000000" min="30000">
                 </div>
                 
-                <button onclick="calculate()">Hitung Keuntungan</button>
+                <button onclick="calculate(1)">Hitung Keuntungan</button>
                 
-                <div id="result" class="result-card">
+                <div id="result1" class="result-card">
                     <h3 class="result-title">📊 Hasil Perhitungan</h3>
                     <div class="result-item">
                         <span class="result-label">Modal Investasi:</span>
-                        <span class="result-value" id="original-investment">Rp0</span>
+                        <span class="result-value" id="original-investment1">Rp0</span>
                     </div>
                     <div class="result-item">
                         <span class="result-label">Bonus Tambahan:</span>
-                        <span class="result-value" id="bonus">Rp0</span>
+                        <span class="result-value" id="bonus1">Rp0</span>
                     </div>
                     <div class="result-item">
                         <span class="result-label">Total Investasi:</span>
-                        <span class="result-value" id="total-investment">Rp0</span>
+                        <span class="result-value" id="total-investment1">Rp0</span>
                     </div>
                     <div class="result-item">
                         <span class="result-label">Pendapatan Harian:</span>
-                        <span class="result-value" id="daily-earnings">Rp0</span>
+                        <span class="result-value" id="daily-earnings1">Rp0</span>
                     </div>
                     <div class="result-item">
-                        <span class="result-label">Total 180 Hari:</span>
-                        <span class="result-value" id="total-earnings">Rp0</span>
+                        <span class="result-label">Total 6 Hari:</span>
+                        <span class="result-value" id="total-earnings1">Rp0</span>
                     </div>
                     <div class="result-item">
                         <span class="result-label">Jumlah Akhir:</span>
-                        <span class="result-value" id="final-amount">Rp0</span>
+                        <span class="result-value" id="final-amount1">Rp0</span>
                     </div>
-                    <p id="gift-message" style="margin-top: 15px; color: var(--accent); font-weight: 600;"></p>
+                    <p id="gift-message1" style="margin-top: 15px; color: var(--accent); font-weight: 600;"></p>
                 </div>
                 
-                <div id="congratulation" class="congratulation-card">
+                <div id="congratulation1" class="congratulation-card">
                     <h3 class="congratulation-title">🎉 Selamat!</h3>
-                    <div id="congratulation-message" class="congratulation-message"></div>
-                    <button class="copy-btn" onclick="copyCongratulation()">Salin Pesan</button>
+                    <div id="congratulation-message1" class="congratulation-message"></div>
+                    <button class="copy-btn" onclick="copyCongratulation(1)">Salin Pesan</button>
                 </div>
             </div>
             
@@ -349,24 +395,19 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Investasi Pertama</td>
-                                <td>Rp10,000</td>
+                                <td>Rp300,000-2,999,999</td>
+                                <td>1%</td>
                                 <td>-</td>
                             </tr>
                             <tr>
-                                <td>Rp800,000-2,999,999</td>
-                                <td>+20%</td>
+                                <td>Rp3,000,000-5,999,999</td>
+                                <td>2%</td>
                                 <td>-</td>
                             </tr>
                             <tr>
-                                <td>Rp3,000,000-9,999,999</td>
-                                <td>+30%</td>
-                                <td>Mesin kopi (≥Rp5jt)</td>
-                            </tr>
-                            <tr>
-                                <td>>Rp10,000,000</td>
-                                <td>+40%</td>
-                                <td>Ponsel (≥Rp20jt)</td>
+                                <td>>Rp6,000,000</td>
+                                <td>3%</td>
+                                <td>-</td>
                             </tr>
                         </tbody>
                     </table>
@@ -375,9 +416,249 @@
                 <div class="bonus-card" style="margin-top: 20px;">
                     <h3 class="section-title">💡 Bonus Tim</h3>
                     <p style="font-size: 14px; margin-top: 10px;">
-                        <strong>Kelas A:</strong> 10% dari keuntungan<br>
-                        <strong>Kelas B:</strong> 5% dari keuntungan<br>
-                        <strong>Kelas C:</strong> 2% dari keuntungan
+                        <strong>Kelas A:</strong> 3% dari keuntungan tim<br>
+                        <strong>Kelas B:</strong> 2% dari keuntungan tim<br>
+                        <strong>Kelas C:</strong> 1% dari keuntungan tim
+                    </p>
+                </div>
+                
+                <div class="bonus-card project-info" style="margin-top: 20px;">
+                    <h3 class="section-title">📊 Informasi Proyek</h3>
+                    <p style="font-size: 14px; margin-top: 10px;">
+                        <strong>Nama Proyek:</strong> BWM-Penerbitan Novel-6 Hari<br>
+                        <strong>Bunga Harian:</strong> 0.7%<br>
+                        <strong>Minimal Investasi:</strong> Rp30.000<br>
+                        <strong>Periode:</strong> 6 hari
+                    </p>
+                </div>
+                
+                <div class="bonus-card" style="margin-top: 20px;">
+                    <h3 class="section-title">📊 Contoh Perhitungan</h3>
+                    <p style="font-size: 14px; margin-top: 10px;">
+                        <strong>Investasi:</strong> Rp3,000,000 + Bonus Rp60,000 = Rp3,060,000<br>
+                        <strong>Harian:</strong> Rp3,060,000 × 0.7% = Rp21,420/hari<br>
+                        <strong>6 Hari:</strong> Rp21,420 × 6 = Rp128,520<br>
+                        <strong>Total:</strong> Rp3,000,000 + Rp128,520 = Rp3,128,520
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tab 2: Penerbitan Novel-13 Hari -->
+        <div class="tab-content">
+            <div class="calculator-section">
+                <h2 class="section-title">
+                    <span>📈 Kalkulator Investasi</span>
+                </h2>
+                
+                <div class="form-group">
+                    <label for="investment2">Jumlah Investasi (Rp)</label>
+                    <input type="number" id="investment2" placeholder="例如: 1000000" min="30000">
+                </div>
+                
+                <button onclick="calculate(2)">Hitung Keuntungan</button>
+                
+                <div id="result2" class="result-card">
+                    <h3 class="result-title">📊 Hasil Perhitungan</h3>
+                    <div class="result-item">
+                        <span class="result-label">Modal Investasi:</span>
+                        <span class="result-value" id="original-investment2">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Bonus Tambahan:</span>
+                        <span class="result-value" id="bonus2">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Total Investasi:</span>
+                        <span class="result-value" id="total-investment2">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Pendapatan Harian:</span>
+                        <span class="result-value" id="daily-earnings2">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Total 13 Hari:</span>
+                        <span class="result-value" id="total-earnings2">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Jumlah Akhir:</span>
+                        <span class="result-value" id="final-amount2">Rp0</span>
+                    </div>
+                    <p id="gift-message2" style="margin-top: 15px; color: var(--accent); font-weight: 600;"></p>
+                </div>
+                
+                <div id="congratulation2" class="congratulation-card">
+                    <h3 class="congratulation-title">🎉 Selamat!</h3>
+                    <div id="congratulation-message2" class="congratulation-message"></div>
+                    <button class="copy-btn" onclick="copyCongratulation(2)">Salin Pesan</button>
+                </div>
+            </div>
+            
+            <div class="calculator-section">
+                <h2 class="section-title">
+                    <span>🎁 Bonus Investasi</span>
+                </h2>
+                
+                <div class="bonus-card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Jumlah Investasi</th>
+                                <th>Bonus</th>
+                                <th>Hadiah</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Rp300,000-2,999,999</td>
+                                <td>1%</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Rp3,000,000-5,999,999</td>
+                                <td>2%</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>>Rp6,000,000</td>
+                                <td>3%</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="bonus-card" style="margin-top: 20px;">
+                    <h3 class="section-title">💡 Bonus Tim</h3>
+                    <p style="font-size: 14px; margin-top: 10px;">
+                        <strong>Kelas A:</strong> 3% dari keuntungan tim<br>
+                        <strong>Kelas B:</strong> 2% dari keuntungan tim<br>
+                        <strong>Kelas C:</strong> 1% dari keuntungan tim
+                    </p>
+                </div>
+                
+                <div class="bonus-card project-info" style="margin-top: 20px;">
+                    <h3 class="section-title">📊 Informasi Proyek</h3>
+                    <p style="font-size: 14px; margin-top: 10px;">
+                        <strong>Nama Proyek:</strong> BWM-Penerbitan Novel-13 Hari<br>
+                        <strong>Bunga Harian:</strong> 0.8%<br>
+                        <strong>Minimal Investasi:</strong> Rp30.000<br>
+                        <strong>Periode:</strong> 13 hari
+                    </p>
+                </div>
+                
+                <div class="bonus-card" style="margin-top: 20px;">
+                    <h3 class="section-title">📊 Contoh Perhitungan</h3>
+                    <p style="font-size: 14px; margin-top: 10px;">
+                        <strong>Investasi:</strong> Rp3,000,000 + Bonus Rp60,000 = Rp3,060,000<br>
+                        <strong>Harian:</strong> Rp3,060,000 × 0.8% = Rp24,480/hari<br>
+                        <strong>13 Hari:</strong> Rp24,480 × 13 = Rp318,240<br>
+                        <strong>Total:</strong> Rp3,000,000 + Rp318,240 = Rp3,318,240
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tab 3: 5G dan Internet of Things - 150 Hari -->
+        <div class="tab-content">
+            <div class="calculator-section">
+                <h2 class="section-title">
+                    <span>📈 Kalkulator Investasi</span>
+                </h2>
+                
+                <div class="form-group">
+                    <label for="investment3">Jumlah Investasi (Rp)</label>
+                    <input type="number" id="investment3" placeholder="例如: 1000000" min="30000">
+                </div>
+                
+                <button onclick="calculate(3)">Hitung Keuntungan</button>
+                
+                <div id="result3" class="result-card">
+                    <h3 class="result-title">📊 Hasil Perhitungan</h3>
+                    <div class="result-item">
+                        <span class="result-label">Modal Investasi:</span>
+                        <span class="result-value" id="original-investment3">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Bonus Tambahan:</span>
+                        <span class="result-value" id="bonus3">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Total Investasi:</span>
+                        <span class="result-value" id="total-investment3">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Pendapatan Harian:</span>
+                        <span class="result-value" id="daily-earnings3">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Total 150 Hari:</span>
+                        <span class="result-value" id="total-earnings3">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Jumlah Akhir:</span>
+                        <span class="result-value" id="final-amount3">Rp0</span>
+                    </div>
+                    <p id="gift-message3" style="margin-top: 15px; color: var(--accent); font-weight: 600;"></p>
+                </div>
+                
+                <div id="congratulation3" class="congratulation-card">
+                    <h3 class="congratulation-title">🎉 Selamat!</h3>
+                    <div id="congratulation-message3" class="congratulation-message"></div>
+                    <button class="copy-btn" onclick="copyCongratulation(3)">Salin Pesan</button>
+                </div>
+            </div>
+            
+            <div class="calculator-section">
+                <h2 class="section-title">
+                    <span>🎁 Bonus Investasi</span>
+                </h2>
+                
+                <div class="bonus-card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Jumlah Investasi</th>
+                                <th>Bonus</th>
+                                <th>Hadiah & Undian</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Rp300,000-2,999,999</td>
+                                <td>20%</td>
+                                <td>1x undian beruntung</td>
+                            </tr>
+                            <tr>
+                                <td>Rp3,000,000-5,999,999</td>
+                                <td>30%</td>
+                                <td>2x undian beruntung</td>
+                            </tr>
+                            <tr>
+                                <td>>Rp6,000,000</td>
+                                <td>40%</td>
+                                <td>3x undian beruntung + Hadiah</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="bonus-card" style="margin-top: 20px;">
+                    <h3 class="section-title">💡 Bonus Tim</h3>
+                    <p style="font-size: 14px; margin-top: 10px;">
+                        <strong>Kelas A:</strong> 10% dari keuntungan tim<br>
+                        <strong>Kelas B:</strong> 5% dari keuntungan tim<br>
+                        <strong>Kelas C:</strong> 2% dari keuntungan tim
+                    </p>
+                </div>
+                
+                <div class="bonus-card project-info" style="margin-top: 20px;">
+                    <h3 class="section-title">📊 Informasi Proyek</h3>
+                    <p style="font-size: 14px; margin-top: 10px;">
+                        <strong>Nama Proyek:</strong> 5G dan Internet of Things - 150 Hari<br>
+                        <strong>Bunga Harian:</strong> 6%<br>
+                        <strong>Minimal Investasi:</strong> Rp30.000<br>
+                        <strong>Periode:</strong> 150 hari
                     </p>
                 </div>
                 
@@ -385,19 +666,16 @@
                     <h3 class="section-title">📊 Contoh Perhitungan</h3>
                     <p style="font-size: 14px; margin-top: 10px;">
                         <strong>Investasi:</strong> Rp3,000,000 + Bonus Rp900,000 = Rp3,900,000<br>
-                        <strong>Harian:</strong> Rp3,900,000 × 8% = Rp312,000/hari<br>
-                        <strong>180 Hari:</strong> Rp312,000 × 180 = Rp56,160,000<br>
-                        <strong>Total:</strong> Rp3,900,000 + Rp56,160,000 = Rp60,060,000
+                        <strong>Harian:</strong> Rp3,900,000 × 6% = Rp234,000/hari<br>
+                        <strong>150 Hari:</strong> Rp234,000 × 150 = Rp35,100,000<br>
+                        <strong>Total:</strong> Rp3,000,000 + Rp35,100,000 = Rp38,100,000
                     </p>
                 </div>
                 
-                <div class="bonus-card" style="margin-top: 20px; background-color: #fff8e1; border-left: 4px solid #ffc107;">
-                    <h3 class="section-title">⏰ Informasi Penting</h3>
+                <div class="bonus-card" style="margin-top: 20px; background-color: #fff8e1; border-left: 4px solid var(--warning);">
+                    <h3 class="section-title">🎁 Hadiah untuk Investasi ≥ Rp6jt</h3>
                     <p style="font-size: 14px; margin-top: 10px;">
-                        <strong>Waktu Pembukaan:</strong> 00:01 tanggal 17 Agustus<br>
-                        <strong>Kuota Terbatas:</strong> Akan terjual habis<br>
-                        <strong>Dijamin oleh:</strong> PT BWM<br>
-                        <strong>Minimal Investasi:</strong> Rp100.000
+                        Pilihan hadiah: penanak nasi, penggorengan udara, speaker Bluetooth, headphone nirkabel, atau alat cukur listrik senilai Rp 1.000.000
                     </p>
                 </div>
             </div>
@@ -405,104 +683,177 @@
     </div>
 
     <script>
-        function calculate() {
-            // Get input value
-            const investment = parseFloat(document.getElementById('investment').value);
+        // Tab switching functionality
+        function switchTab(tabIndex) {
+            // Hide all tabs and remove active class from buttons
+            const tabContents = document.querySelectorAll('.tab-content');
+            const tabButtons = document.querySelectorAll('.tab-btn');
             
-            if (isNaN(investment) || investment < 100000) {
-                alert("Minimal investasi Rp100,000");
+            tabContents.forEach(tab => tab.classList.remove('active'));
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab and activate button
+            tabContents[tabIndex].classList.add('active');
+            tabButtons[tabIndex].classList.add('active');
+        }
+        
+        // Calculation function
+        function calculate(projectNum) {
+            // Get input value
+            const investment = parseFloat(document.getElementById(`investment${projectNum}`).value);
+            
+            if (isNaN(investment) || investment < 30000) {
+                alert(`Minimal investasi untuk proyek ini adalah Rp30,000`);
                 return;
             }
             
-            // Calculate bonus with rounding
-            let bonus = 0;
-            let gift = "";
+            // Project-specific variables
+            let dailyRate, days, bonusRate, gift = "", lottery = 0;
             
-            if (investment >= 10000000) {
-                bonus = Math.round(investment * 0.40 / 1000) * 1000; // Round to nearest 1000
-                if (investment >= 20000000) {
-                    gift = "Ponsel gratis (senilai Rp4,500,000)";
-                }
-            } else if (investment >= 3000000) {
-                bonus = Math.round(investment * 0.30 / 1000) * 1000;
-                if (investment >= 5000000) {
-                    gift = "Mesin kopi (senilai Rp1,000,000)";
-                }
-            } else if (investment >= 800000) {
-                bonus = Math.round(investment * 0.20 / 1000) * 1000;
-            } else {
-                bonus = 10000; // First-time bonus
+            switch(projectNum) {
+                case 1: // 6-day project
+                    dailyRate = 0.007; // 0.7%
+                    days = 6;
+                    
+                    if (investment >= 6000000) {
+                        bonusRate = 0.03;
+                    } else if (investment >= 3000000) {
+                        bonusRate = 0.02;
+                    } else if (investment >= 300000) {
+                        bonusRate = 0.01;
+                    } else {
+                        bonusRate = 0;
+                    }
+                    break;
+                    
+                case 2: // 13-day project
+                    dailyRate = 0.008; // 0.8%
+                    days = 13;
+                    
+                    if (investment >= 6000000) {
+                        bonusRate = 0.03;
+                    } else if (investment >= 3000000) {
+                        bonusRate = 0.02;
+                    } else if (investment >= 300000) {
+                        bonusRate = 0.01;
+                    } else {
+                        bonusRate = 0;
+                    }
+                    break;
+                    
+                case 3: // 150-day project
+                    dailyRate = 0.06; // 6%
+                    days = 150;
+                    
+                    if (investment >= 6000000) {
+                        bonusRate = 0.40;
+                        lottery = 3;
+                        gift = "Pilihan hadiah: penanak nasi, penggorengan udara, speaker Bluetooth, headphone nirkabel, atau alat cukur listrik senilai Rp 1.000.000";
+                    } else if (investment >= 3000000) {
+                        bonusRate = 0.30;
+                        lottery = 2;
+                    } else if (investment >= 300000) {
+                        bonusRate = 0.20;
+                        lottery = 1;
+                    } else {
+                        bonusRate = 0;
+                    }
+                    break;
             }
+            
+            // Calculate bonus with rounding
+            const bonus = Math.round(investment * bonusRate / 1000) * 1000;
             
             // Calculate totals with rounding
             const totalInvestment = investment + bonus;
-            const dailyEarnings = Math.round(totalInvestment * 0.08 / 100) * 100; // Round to nearest 100
-            const totalEarnings = Math.round(dailyEarnings * 180 / 1000) * 1000; // Round to nearest 1000
-            const finalAmount = totalInvestment + totalEarnings;
+            const dailyEarnings = Math.round(totalInvestment * dailyRate / 100) * 100;
+            const totalEarnings = Math.round(dailyEarnings * days / 1000) * 1000;
+            const finalAmount = investment + totalEarnings;
             
             // Display results
-            document.getElementById('original-investment').textContent = formatCurrency(investment);
-            document.getElementById('bonus').textContent = formatCurrency(bonus);
-            document.getElementById('total-investment').textContent = formatCurrency(totalInvestment);
-            document.getElementById('daily-earnings').textContent = formatCurrency(dailyEarnings);
-            document.getElementById('total-earnings').textContent = formatCurrency(totalEarnings);
-            document.getElementById('final-amount').textContent = formatCurrency(finalAmount);
+            document.getElementById(`original-investment${projectNum}`).textContent = formatCurrency(investment);
+            document.getElementById(`bonus${projectNum}`).textContent = formatCurrency(bonus);
+            document.getElementById(`total-investment${projectNum}`).textContent = formatCurrency(totalInvestment);
+            document.getElementById(`daily-earnings${projectNum}`).textContent = formatCurrency(dailyEarnings);
+            document.getElementById(`total-earnings${projectNum}`).textContent = formatCurrency(totalEarnings);
+            document.getElementById(`final-amount${projectNum}`).textContent = formatCurrency(finalAmount);
             
+            // Display gift/lottery message if applicable
+            const giftMessage = document.getElementById(`gift-message${projectNum}`);
             if (gift) {
-                document.getElementById('gift-message').innerHTML = `🎁 Anda akan mendapatkan: <strong>${gift}</strong>`;
+                giftMessage.innerHTML = `🎁 Anda akan mendapatkan: <strong>${gift}</strong>`;
+            } else if (lottery > 0) {
+                giftMessage.innerHTML = `🎰 Anda mendapatkan <strong>${lottery} undian beruntung</strong>`;
             } else {
-                document.getElementById('gift-message').innerHTML = "";
+                giftMessage.innerHTML = "";
             }
             
-            document.getElementById('result').style.display = 'block';
+            document.getElementById(`result${projectNum}`).style.display = 'block';
             
             // Generate congratulation message (in Indonesian)
-            generateCongratulation(investment, bonus, totalInvestment, dailyEarnings, totalEarnings, finalAmount, gift);
-            document.getElementById('congratulation').style.display = 'block';
+            generateCongratulation(projectNum, investment, bonus, totalInvestment, dailyEarnings, totalEarnings, finalAmount, gift, lottery);
+            document.getElementById(`congratulation${projectNum}`).style.display = 'block';
             
             // Scroll to results
-            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById(`result${projectNum}`).scrollIntoView({ behavior: 'smooth' });
         }
         
-        function generateCongratulation(investment, bonus, totalInvestment, dailyEarnings, totalEarnings, finalAmount, gift) {
-            let giftMessage = "";
+        function generateCongratulation(projectNum, investment, bonus, totalInvestment, dailyEarnings, totalEarnings, finalAmount, gift, lottery) {
+            let projectName = "";
+            let days = 0;
             
+            switch(projectNum) {
+                case 1:
+                    projectName = "BWM-Penerbitan Novel-6 Hari";
+                    days = 6;
+                    break;
+                case 2:
+                    projectName = "BWM-Penerbitan Novel-13 Hari";
+                    days = 13;
+                    break;
+                case 3:
+                    projectName = "5G dan Internet of Things - 150 Hari";
+                    days = 150;
+                    break;
+            }
+            
+            let giftMessage = "";
             if (gift) {
                 giftMessage = `
                     <p><span class="emoji">🎁</span> <strong>Hadiah Spesial:</strong> Anda juga akan menerima <strong>${gift}</strong> sebagai hadiah investasi!</p>
                 `;
+            } else if (lottery > 0) {
+                giftMessage = `
+                    <p><span class="emoji">🎰</span> <strong>Kesempatan Undian:</strong> Anda mendapatkan <strong>${lottery} undian beruntung</strong> untuk memenangkan hadiah menarik!</p>
+                `;
             }
             
             const message = `
-                <p><span class="emoji">🎉</span> <strong>Selamat atas keberhasilan investasi Anda dalam Proyek Investasi Manfaat Khusus Hari Nasional 180 Hari!</strong> <span class="emoji">🎉</span></p>
+                <p><span class="emoji">🎉</span> <strong>Selamat atas keberhasilan investasi Anda dalam ${projectName}!</strong> <span class="emoji">🎉</span></p>
                 
                 <p>Modal yang Anda investasikan <strong>${formatCurrency(investment)}</strong> + Bonus <strong>${formatCurrency(bonus)}</strong>,<br>
                 total <strong>${formatCurrency(totalInvestment)}</strong> telah berinvestasi dalam proyek istimewa ini!</p>
                 
                 ${giftMessage}
                 
-                <p><span class="emoji">🚀</span> Dengan pengembalian harian yang stabil sebesar 8%, Anda akan mendapatkan:</p>
+                <p><span class="emoji">🚀</span> Dengan pengembalian harian yang stabil, Anda akan mendapatkan:</p>
                 
                 <p><span class="emoji">💰</span> <strong>Pendapatan harian: ${formatCurrency(dailyEarnings)}!</strong><br>
-                <span class="emoji">💎</span> <strong>Pokok + Pengembalian: ${formatCurrency(finalAmount)}!</strong></p>
-                 <p> <strong>• Cashback Rp10.000 untuk pembelian pertama!</strong><br>
-                <p>Jika Anda mengajak anggota tim (downline) untuk berpartisipasi, Anda bisa mendapatkan bonus tambahan:<br>
-                - Kelas A: 10% dari keuntungan<br>
-                - Kelas B: 5% dari keuntungan<br>
-                - Kelas C: 2% dari keuntungan</p>
+                <span class="emoji">💎</span> <strong>Total pengembalian setelah ${days} hari: ${formatCurrency(totalEarnings)}!</strong><br>
+                <span class="emoji">🏦</span> <strong>Pokok + Pengembalian: ${formatCurrency(finalAmount)}!</strong></p>
                 
-                <p>Ini adalah kesempatan investasi terbatas yang hanya tersedia selama periode Hari Nasional! <span class="emoji">⏰</span></p>
+                <p>Jika Anda mengajak anggota tim (downline) untuk berpartisipasi, Anda bisa mendapatkan bonus tambahan!</p>
                 
-                <p>Proyek ini dijamin oleh PT BWM dengan pengembalian harian yang stabil dan terjamin. <span class="emoji">🛡️</span></p>
+                <p>Proyek ini dijamin oleh PT BWM dengan pengembalian yang stabil dan terjamin. <span class="emoji">🛡️</span></p>
                 
                 <p>Selamat sekali lagi atas partisipasi Anda dalam proyek istimewa ini. Semoga investasi Anda membawa hasil yang melimpah! <span class="emoji">🎊💼</span></p>
             `;
             
-            document.getElementById('congratulation-message').innerHTML = message;
+            document.getElementById(`congratulation-message${projectNum}`).innerHTML = message;
         }
         
-        function copyCongratulation() {
-            const congratulation = document.getElementById('congratulation-message');
+        function copyCongratulation(projectNum) {
+            const congratulation = document.getElementById(`congratulation-message${projectNum}`);
             const range = document.createRange();
             range.selectNode(congratulation);
             window.getSelection().removeAllRanges();
@@ -511,7 +862,7 @@
             window.getSelection().removeAllRanges();
             
             // Show feedback
-            const btn = document.querySelector('.copy-btn');
+            const btn = document.querySelector(`#congratulation${projectNum} .copy-btn`);
             btn.textContent = 'Tersalin!';
             setTimeout(() => {
                 btn.textContent = 'Salin Pesan';
