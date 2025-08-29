@@ -351,6 +351,9 @@
         
         <div class="tabs">
             <button class="tab-btn active" onclick="switchTab(0)">Investasi Masa Depan Stabil-90 Hari</button>
+            <button class="tab-btn" onclick="switchTab(1)">Investasi Masa Depan Stabil-120 Hari</button>
+            <button class="tab-btn" onclick="switchTab(2)">Investasi Masa Depan Stabil-220 Hari</button>
+            <button class="tab-btn" onclick="switchTab(3)">Investasi Masa Depan Stabil-320 Hari</button>
         </div>
         
         <!-- Tab 1: Investasi Masa Depan Stabil-90 Hari -->
@@ -361,45 +364,45 @@
                 </h2>
                 
                 <div class="form-group">
-                    <label for="investment1">Jumlah Investasi (Rp)</label>
-                    <input type="number" id="investment1" placeholder="例如: 1000000" min="30000">
+                    <label for="investment0">Jumlah Investasi (Rp)</label>
+                    <input type="number" id="investment0" placeholder="例如: 1000000" min="30000">
                 </div>
                 
-                <button onclick="calculate(1)">Hitung Keuntungan</button>
+                <button onclick="calculate(0)">Hitung Keuntungan</button>
                 
-                <div id="result1" class="result-card">
+                <div id="result0" class="result-card">
                     <h3 class="result-title">📊 Hasil Perhitungan</h3>
                     <div class="result-item">
                         <span class="result-label">Modal Investasi:</span>
-                        <span class="result-value" id="original-investment1">Rp0</span>
+                        <span class="result-value" id="original-investment0">Rp0</span>
                     </div>
                     <div class="result-item">
                         <span class="result-label">Bonus Tambahan:</span>
-                        <span class="result-value" id="bonus1">Rp0</span>
+                        <span class="result-value" id="bonus0">Rp0</span>
                     </div>
                     <div class="result-item">
                         <span class="result-label">Total Investasi:</span>
-                        <span class="result-value" id="total-investment1">Rp0</span>
+                        <span class="result-value" id="total-investment0">Rp0</span>
                     </div>
                     <div class="result-item">
                         <span class="result-label">Pendapatan Harian:</span>
-                        <span class="result-value" id="daily-earnings1">Rp0</span>
+                        <span class="result-value" id="daily-earnings0">Rp0</span>
                     </div>
                     <div class="result-item">
                         <span class="result-label">Total 90 Hari:</span>
-                        <span class="result-value" id="total-earnings1">Rp0</span>
+                        <span class="result-value" id="total-earnings0">Rp0</span>
                     </div>
                     <div class="result-item">
                         <span class="result-label">Jumlah Akhir:</span>
-                        <span class="result-value" id="final-amount1">Rp0</span>
+                        <span class="result-value" id="final-amount0">Rp0</span>
                     </div>
-                    <p id="gift-message1" style="margin-top: 15px; color: var(--accent); font-weight: 600;"></p>
+                    <p id="gift-message0" style="margin-top: 15px; color: var(--accent); font-weight: 600;"></p>
                 </div>
                 
-                <div id="congratulation1" class="congratulation-card">
+                <div id="congratulation0" class="congratulation-card">
                     <h3 class="congratulation-title">🎉 Selamat!</h3>
-                    <div id="congratulation-message1" class="congratulation-message"></div>
-                    <button class="copy-btn" onclick="copyCongratulation(1)">Salin Pesan</button>
+                    <div id="congratulation-message0" class="congratulation-message"></div>
+                    <button class="copy-btn" onclick="copyCongratulation(0)">Salin Pesan</button>
                 </div>
             </div>
             
@@ -426,17 +429,17 @@
                             <tr>
                                 <td>Rp5,000,000-19,999,000</td>
                                 <td>25%</td>
-                                <td>Sepeda (Rp1,000,000) 🚴</td>
+                                <td>Sepeda (Rp1,000,000)</td>
                             </tr>
                             <tr>
                                 <td>Rp20,000,000-49,999,000</td>
                                 <td>30%</td>
-                                <td>Laptop (Rp5,000,000) 💻</td>
+                                <td>Laptop (Rp5,000,000)</td>
                             </tr>
                             <tr>
-                                <td>Rp50,000,000-99,990,000</td>
+                                <td>≥ Rp50,000,000</td>
                                 <td>35%</td>
-                                <td>Peralatan Rumah Tangga (Rp1,000,000)</td>
+                                <td>Peralatan rumah tangga (Rp1,000,000)</td>
                             </tr>
                         </tbody>
                     </table>
@@ -473,7 +476,385 @@
                 
                 <div class="countdown">
                     <div class="countdown-title">⏳ Waktu Tersisa untuk Investasi:</div>
+                    <div class="countdown-timer" id="countdown0">06:00:00:00</div>
+                    <div class="availability">Kuota sangat terbatas! Jangan sampai kehabisan!</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tab 2: Investasi Masa Depan Stabil-120 Hari -->
+        <div class="tab-content">
+            <div class="calculator-section">
+                <h2 class="section-title">
+                    <span>📈 Kalkulator Investasi</span>
+                </h2>
+                
+                <div class="form-group">
+                    <label for="investment1">Jumlah Investasi (Rp)</label>
+                    <input type="number" id="investment1" placeholder="例如: 1000000" min="30000">
+                </div>
+                
+                <button onclick="calculate(1)">Hitung Keuntungan</button>
+                
+                <div id="result1" class="result-card">
+                    <h3 class="result-title">📊 Hasil Perhitungan</h3>
+                    <div class="result-item">
+                        <span class="result-label">Modal Investasi:</span>
+                        <span class="result-value" id="original-investment1">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Bonus Tambahan:</span>
+                        <span class="result-value" id="bonus1">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Total Investasi:</span>
+                        <span class="result-value" id="total-investment1">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Pendapatan Harian:</span>
+                        <span class="result-value" id="daily-earnings1">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Total 120 Hari:</span>
+                        <span class="result-value" id="total-earnings1">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Jumlah Akhir:</span>
+                        <span class="result-value" id="final-amount1">Rp0</span>
+                    </div>
+                    <p id="gift-message1" style="margin-top: 15px; color: var(--accent); font-weight: 600;"></p>
+                </div>
+                
+                <div id="congratulation1" class="congratulation-card">
+                    <h3 class="congratulation-title">🎉 Selamat!</h3>
+                    <div id="congratulation-message1" class="congratulation-message"></div>
+                    <button class="copy-btn" onclick="copyCongratulation(1)">Salin Pesan</button>
+                </div>
+            </div>
+            
+            <div class="calculator-section">
+                <h2 class="section-title">
+                    <span>🎁 Bonus Investasi</span>
+                </h2>
+                
+                <div class="bonus-card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Jumlah Investasi</th>
+                                <th>Bonus</th>
+                                <th>Hadiah</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Rp200,000-990,000</td>
+                                <td>15%</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Rp1,000,000-2,990,000</td>
+                                <td>20%</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Rp3,000,000-19,990,000</td>
+                                <td>25%</td>
+                                <td>Sepeda (Rp1,500,000)</td>
+                            </tr>
+                            <tr>
+                                <td>≥ Rp20,000,000</td>
+                                <td>30%</td>
+                                <td>Laptop (Rp5,000,000)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="bonus-card" style="margin-top: 20px;">
+                    <h3 class="section-title">💡 Bonus Tim</h3>
+                    <p style="font-size: 14px; margin-top: 10px;">
+                        <strong>Kelas A:</strong> 10% dari keuntungan tim<br>
+                        <strong>Kelas B:</strong> 5% dari keuntungan tim<br>
+                        <strong>Kelas C:</strong> 2% dari keuntungan tim
+                    </p>
+                </div>
+                
+                <div class="bonus-card project-info" style="margin-top: 20px;">
+                    <h3 class="section-title">📊 Informasi Proyek</h3>
+                    <p style="font-size: 14px; margin-top: 10px;">
+                        <strong>Nama Proyek:</strong> Investasi Masa Depan Stabil-120 Hari<br>
+                        <strong>Bunga Harian:</strong> 7%<br>
+                        <strong>Minimal Investasi:</strong> Rp30.000<br>
+                        <strong>Periode:</strong> 120 hari
+                    </p>
+                </div>
+                
+                <div class="bonus-card" style="margin-top: 20px;">
+                    <h3 class="section-title">📊 Contoh Perhitungan</h3>
+                    <p style="font-size: 14px; margin-top: 10px;">
+                        <strong>Investasi:</strong> Rp3,000,000 + Bonus 25% (Rp750,000) = Rp3,750,000<br>
+                        <strong>Harian:</strong> Rp3,750,000 × 7% = Rp262,500/hari<br>
+                        <strong>120 Hari:</strong> Rp262,500 × 120 = Rp31,500,000<br>
+                        <strong>Total:</strong> Rp3,000,000 + Rp31,500,000 = Rp34,500,000
+                    </p>
+                </div>
+                
+                <div class="countdown">
+                    <div class="countdown-title">⏳ Waktu Tersisa untuk Investasi:</div>
                     <div class="countdown-timer" id="countdown1">06:00:00:00</div>
+                    <div class="availability">Kuota sangat terbatas! Jangan sampai kehabisan!</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tab 3: Investasi Masa Depan Stabil-220 Hari -->
+        <div class="tab-content">
+            <div class="calculator-section">
+                <h2 class="section-title">
+                    <span>📈 Kalkulator Investasi</span>
+                </h2>
+                
+                <div class="form-group">
+                    <label for="investment2">Jumlah Investasi (Rp)</label>
+                    <input type="number" id="investment2" placeholder="例如: 1000000" min="30000">
+                </div>
+                
+                <button onclick="calculate(2)">Hitung Keuntungan</button>
+                
+                <div id="result2" class="result-card">
+                    <h3 class="result-title">📊 Hasil Perhitungan</h3>
+                    <div class="result-item">
+                        <span class="result-label">Modal Investasi:</span>
+                        <span class="result-value" id="original-investment2">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Bonus Tambahan:</span>
+                        <span class="result-value" id="bonus2">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Total Investasi:</span>
+                        <span class="result-value" id="total-investment2">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Pendapatan Harian:</span>
+                        <span class="result-value" id="daily-earnings2">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Total 220 Hari:</span>
+                        <span class="result-value" id="total-earnings2">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Jumlah Akhir:</span>
+                        <span class="result-value" id="final-amount2">Rp0</span>
+                    </div>
+                    <p id="gift-message2" style="margin-top: 15px; color: var(--accent); font-weight: 600;"></p>
+                </div>
+                
+                <div id="congratulation2" class="congratulation-card">
+                    <h3 class="congratulation-title">🎉 Selamat!</h3>
+                    <div id="congratulation-message2" class="congratulation-message"></div>
+                    <button class="copy-btn" onclick="copyCongratulation(2)">Salin Pesan</button>
+                </div>
+            </div>
+            
+            <div class="calculator-section">
+                <h2 class="section-title">
+                    <span>🎁 Bonus Investasi</span>
+                </h2>
+                
+                <div class="bonus-card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Jumlah Investasi</th>
+                                <th>Bonus</th>
+                                <th>Hadiah</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Rp200,000-990,000</td>
+                                <td>15%</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Rp1,000,000-2,990,000</td>
+                                <td>20%</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Rp3,000,000-19,990,000</td>
+                                <td>25%</td>
+                                <td>Sepeda (Rp1,500,000)</td>
+                            </tr>
+                            <tr>
+                                <td>≥ Rp20,000,000</td>
+                                <td>30%</td>
+                                <td>Laptop (Rp5,000,000)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="bonus-card" style="margin-top: 20px;">
+                    <h3 class="section-title">💡 Bonus Tim</h3>
+                    <p style="font-size: 14px; margin-top: 10px;">
+                        <strong>Kelas A:</strong> 10% dari keuntungan tim<br>
+                        <strong>Kelas B:</strong> 5% dari keuntungan tim<br>
+                        <strong>Kelas C:</strong> 2% dari keuntungan tim
+                    </p>
+                </div>
+                
+                <div class="bonus-card project-info" style="margin-top: 20px;">
+                    <h3 class="section-title">📊 Informasi Proyek</h3>
+                    <p style="font-size: 14px; margin-top: 10px;">
+                        <strong>Nama Proyek:</strong> Investasi Masa Depan Stabil-220 Hari<br>
+                        <strong>Bunga Harian:</strong> 8%<br>
+                        <strong>Minimal Investasi:</strong> Rp30.000<br>
+                        <strong>Periode:</strong> 220 hari
+                    </p>
+                </div>
+                
+                <div class="bonus-card" style="margin-top: 20px;">
+                    <h3 class="section-title">📊 Contoh Perhitungan</h3>
+                    <p style="font-size: 14px; margin-top: 10px;">
+                        <strong>Investasi:</strong> Rp3,000,000 + Bonus 25% (Rp750,000) = Rp3,750,000<br>
+                        <strong>Harian:</strong> Rp3,750,000 × 8% = Rp300,000/hari<br>
+                        <strong>220 Hari:</strong> Rp300,000 × 220 = Rp66,000,000<br>
+                        <strong>Total:</strong> Rp3,000,000 + Rp66,000,000 = Rp69,000,000
+                    </p>
+                </div>
+                
+                <div class="countdown">
+                    <div class="countdown-title">⏳ Waktu Tersisa untuk Investasi:</div>
+                    <div class="countdown-timer" id="countdown2">06:00:00:00</div>
+                    <div class="availability">Kuota sangat terbatas! Jangan sampai kehabisan!</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tab 4: Investasi Masa Depan Stabil-320 Hari -->
+        <div class="tab-content">
+            <div class="calculator-section">
+                <h2 class="section-title">
+                    <span>📈 Kalkulator Investasi</span>
+                </h2>
+                
+                <div class="form-group">
+                    <label for="investment3">Jumlah Investasi (Rp)</label>
+                    <input type="number" id="investment3" placeholder="例如: 1000000" min="30000">
+                </div>
+                
+                <button onclick="calculate(3)">Hitung Keuntungan</button>
+                
+                <div id="result3" class="result-card">
+                    <h3 class="result-title">📊 Hasil Perhitungan</h3>
+                    <div class="result-item">
+                        <span class="result-label">Modal Investasi:</span>
+                        <span class="result-value" id="original-investment3">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Bonus Tambahan:</span>
+                        <span class="result-value" id="bonus3">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Total Investasi:</span>
+                        <span class="result-value" id="total-investment3">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Pendapatan Harian:</span>
+                        <span class="result-value" id="daily-earnings3">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Total 320 Hari:</span>
+                        <span class="result-value" id="total-earnings3">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Jumlah Akhir:</span>
+                        <span class="result-value" id="final-amount3">Rp0</span>
+                    </div>
+                    <p id="gift-message3" style="margin-top: 15px; color: var(--accent); font-weight: 600;"></p>
+                </div>
+                
+                <div id="congratulation3" class="congratulation-card">
+                    <h3 class="congratulation-title">🎉 Selamat!</h3>
+                    <div id="congratulation-message3" class="congratulation-message"></div>
+                    <button class="copy-btn" onclick="copyCongratulation(3)">Salin Pesan</button>
+                </div>
+            </div>
+            
+            <div class="calculator-section">
+                <h2 class="section-title">
+                    <span>🎁 Bonus Investasi</span>
+                </h2>
+                
+                <div class="bonus-card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Jumlah Investasi</th>
+                                <th>Bonus</th>
+                                <th>Hadiah</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Rp200,000-990,000</td>
+                                <td>15%</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Rp1,000,000-2,990,000</td>
+                                <td>20%</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Rp3,000,000-19,990,000</td>
+                                <td>25%</td>
+                                <td>Sepeda (Rp1,500,000)</td>
+                            </tr>
+                            <tr>
+                                <td>≥ Rp20,000,000</td>
+                                <td>30%</td>
+                                <td>Laptop (Rp5,000,000)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="bonus-card" style="margin-top: 20px;">
+                    <h3 class="section-title">💡 Bonus Tim</h3>
+                    <p style="font-size: 14px; margin-top: 10px;">
+                        <strong>Kelas A:</strong> 10% dari keuntungan tim<br>
+                        <strong>Kelas B:</strong> 5% dari keuntungan tim<br>
+                        <strong>Kelas C:</strong> 2% dari keuntungan tim
+                    </p>
+                </div>
+                
+                <div class="bonus-card project-info" style="margin-top: 20px;">
+                    <h3 class="section-title">📊 Informasi Proyek</h3>
+                    <p style="font-size: 14px; margin-top: 10px;">
+                        <strong>Nama Proyek:</strong> Investasi Masa Depan Stabil-320 Hari<br>
+                        <strong>Bunga Harian:</strong> 9%<br>
+                        <strong>Minimal Investasi:</strong> Rp30.000<br>
+                        <strong>Periode:</strong> 320 hari
+                    </p>
+                </div>
+                
+                <div class="bonus-card" style="margin-top: 20px;">
+                    <h3 class="section-title">📊 Contoh Perhitungan</h3>
+                    <p style="font-size: 14px; margin-top: 10px;">
+                        <strong>Investasi:</strong> Rp3,000,000 + Bonus 25% (Rp750,000) = Rp3,750,000<br>
+                        <strong>Harian:</strong> Rp3,750,000 × 9% = Rp337,500/hari<br>
+                        <strong>320 Hari:</strong> Rp337,500 × 320 = Rp108,000,000<br>
+                        <strong>Total:</strong> Rp3,000,000 + Rp108,000,000 = Rp111,000,000
+                    </p>
+                </div>
+                
+                <div class="countdown">
+                    <div class="countdown-title">⏳ Waktu Tersisa untuk Investasi:</div>
+                    <div class="countdown-timer" id="countdown3">06:00:00:00</div>
                     <div class="availability">Kuota sangat terbatas! Jangan sampai kehabisan!</div>
                 </div>
             </div>
@@ -503,25 +884,91 @@
             }
             
             // Project-specific variables
-            const dailyRate = 0.09; // 9%
-            const days = 90;
-            const projectName = "Investasi Masa Depan Stabil-90 Hari";
-            
-            let bonusRate = 0;
-            let gift = "";
-            
-            // Determine bonus rate and gift based on investment amount
-            if (investment >= 50000000) {
-                bonusRate = 0.35;
-                gift = "Peralatan Rumah Tangga senilai Rp1,000,000";
-            } else if (investment >= 20000000) {
-                bonusRate = 0.30;
-                gift = "Laptop senilai Rp5,000,000 💻";
-            } else if (investment >= 5000000) {
-                bonusRate = 0.25;
-                gift = "Sepeda senilai Rp1,000,000 🚴";
-            } else if (investment >= 300000) {
-                bonusRate = 0.20;
+            let dailyRate, days, projectName, bonusRate, gift;
+            if (projectNum === 0) {
+                dailyRate = 0.09; // 9%
+                days = 90;
+                projectName = "Investasi Masa Depan Stabil-90 Hari";
+                // Bonus and gift for 90-day project
+                if (investment >= 50000000) {
+                    bonusRate = 0.35;
+                    gift = "Peralatan rumah tangga senilai Rp1,000,000";
+                } else if (investment >= 20000000) {
+                    bonusRate = 0.30;
+                    gift = "Laptop senilai Rp5,000,000";
+                } else if (investment >= 5000000) {
+                    bonusRate = 0.25;
+                    gift = "Sepeda senilai Rp1,000,000";
+                } else if (investment >= 300000) {
+                    bonusRate = 0.20;
+                    gift = "";
+                } else {
+                    bonusRate = 0;
+                    gift = "";
+                }
+            } else if (projectNum === 1) {
+                dailyRate = 0.07; // 7%
+                days = 120;
+                projectName = "Investasi Masa Depan Stabil-120 Hari";
+                // Bonus and gift for 120-day project
+                if (investment >= 20000000) {
+                    bonusRate = 0.30;
+                    gift = "Laptop senilai Rp5,000,000";
+                } else if (investment >= 3000000) {
+                    bonusRate = 0.25;
+                    gift = "Sepeda senilai Rp1,500,000";
+                } else if (investment >= 1000000) {
+                    bonusRate = 0.20;
+                    gift = "";
+                } else if (investment >= 200000) {
+                    bonusRate = 0.15;
+                    gift = "";
+                } else {
+                    bonusRate = 0;
+                    gift = "";
+                }
+            } else if (projectNum === 2) {
+                dailyRate = 0.08; // 8%
+                days = 220;
+                projectName = "Investasi Masa Depan Stabil-220 Hari";
+                // Bonus and gift for 220-day project
+                if (investment >= 20000000) {
+                    bonusRate = 0.30;
+                    gift = "Laptop senilai Rp5,000,000";
+                } else if (investment >= 3000000) {
+                    bonusRate = 0.25;
+                    gift = "Sepeda senilai Rp1,500,000";
+                } else if (investment >= 1000000) {
+                    bonusRate = 0.20;
+                    gift = "";
+                } else if (investment >= 200000) {
+                    bonusRate = 0.15;
+                    gift = "";
+                } else {
+                    bonusRate = 0;
+                    gift = "";
+                }
+            } else {
+                dailyRate = 0.09; // 9%
+                days = 320;
+                projectName = "Investasi Masa Depan Stabil-320 Hari";
+                // Bonus and gift for 320-day project
+                if (investment >= 20000000) {
+                    bonusRate = 0.30;
+                    gift = "Laptop senilai Rp5,000,000";
+                } else if (investment >= 3000000) {
+                    bonusRate = 0.25;
+                    gift = "Sepeda senilai Rp1,500,000";
+                } else if (investment >= 1000000) {
+                    bonusRate = 0.20;
+                    gift = "";
+                } else if (investment >= 200000) {
+                    bonusRate = 0.15;
+                    gift = "";
+                } else {
+                    bonusRate = 0;
+                    gift = "";
+                }
             }
             
             // Calculate bonus with rounding
@@ -567,6 +1014,11 @@
                 `;
             }
             
+            // Adjust team bonus percentages for 90-day project
+            const teamBonusText = projectNum === 0 
+                ? "<p>Jika Anda mengajak anggota tim (downline) untuk berpartisipasi, Anda bisa mendapatkan bonus tambahan 15%/10%/5%!</p>"
+                : "<p>Jika Anda mengajak anggota tim (downline) untuk berpartisipasi, Anda bisa mendapatkan bonus tambahan 10%/5%/2%!</p>";
+            
             const message = `
                 <p><span class="emoji">🎉</span> <strong>Selamat atas keberhasilan investasi Anda dalam ${projectName}!</strong> <span class="emoji">🎉</span></p>
                 
@@ -577,7 +1029,7 @@
                 
                 <p><span class="emoji">🚀</span> Dengan pengembalian harian yang stabil, Anda akan mendapatkan:</p>
                 
-                <p>Jika Anda mengajak anggota tim (downline) untuk berpartisipasi, Anda bisa mendapatkan bonus tambahan 15%/10%/5%!</p>
+                ${teamBonusText}
                 
                 <p>Proyek ini dijamin oleh PT BWM dengan pengembalian yang stabil dan terjamin. <span class="emoji">🛡️</span></p>
                 
@@ -614,7 +1066,10 @@
             const diff = targetDate - now;
             
             if (diff <= 0) {
+                document.getElementById('countdown0').textContent = "Penawaran Telah Berakhir";
                 document.getElementById('countdown1').textContent = "Penawaran Telah Berakhir";
+                document.getElementById('countdown2').textContent = "Penawaran Telah Berakhir";
+                document.getElementById('countdown3').textContent = "Penawaran Telah Berakhir";
                 return;
             }
             
@@ -624,7 +1079,10 @@
             const seconds = Math.floor((diff % (1000 * 60)) / 1000);
             
             const countdown = `${days.toString().padStart(2, '0')}:${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            document.getElementById('countdown0').textContent = countdown;
             document.getElementById('countdown1').textContent = countdown;
+            document.getElementById('countdown2').textContent = countdown;
+            document.getElementById('countdown3').textContent = countdown;
         }
         
         setInterval(updateCountdown, 1000);
