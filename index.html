@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyek Investasi BWM - Robot Cerdas</title>
+    <title>Manfaat Spesial Maulid Nabi Muhammad SAW - BWM</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -345,17 +345,16 @@
     <div class="container">
         <header>
             <div class="ribbon">限时优惠!</div>
-            <h1>Proyek Investasi BWM - Robot Cerdas</h1>
+            <h1>Manfaat Spesial Maulid Nabi Muhammad SAW - BWM</h1>
             <p>🤖 Teknologi AI Terdepan | 🎁 Bonus Menarik | 🚀 Kesempatan Investasi Menguntungkan</p>
         </header>
         
         <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab(0)">Investasi Masa Depan Stabil-4 Hari</button>
-            <button class="tab-btn" onclick="switchTab(1)">Investasi Masa Depan Stabil-12 Hari</button>
-            <button class="tab-btn" onclick="switchTab(2)">Investasi Masa Depan Stabil-100 Hari</button>
+            <button class="tab-btn active" onclick="switchTab(0)">Manfaat Spesial Maulid - 60 Hari</button>
+            <button class="tab-btn" onclick="switchTab(1)">Manfaat Spesial Maulid - 100 Hari</button>
         </div>
         
-        <!-- Tab 1: Investasi Masa Depan Stabil-4 Hari -->
+        <!-- Tab 1: Manfaat Spesial Maulid - 60 Hari -->
         <div class="tab-content active">
             <div class="calculator-section">
                 <h2 class="section-title">
@@ -364,7 +363,7 @@
                 
                 <div class="form-group">
                     <label for="investment0">Jumlah Investasi (Rp)</label>
-                    <input type="number" id="investment0" placeholder="例如: 1000000" min="30000">
+                    <input type="number" id="investment0" placeholder="例如: 1000000" min="300000">
                 </div>
                 
                 <button onclick="calculate(0)">Hitung Keuntungan</button>
@@ -376,17 +375,26 @@
                         <span class="result-value" id="original-investment0">Rp0</span>
                     </div>
                     <div class="result-item">
+                        <span class="result-label">Bonus Tambahan:</span>
+                        <span class="result-value" id="bonus0">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Total Investasi:</span>
+                        <span class="result-value" id="total-investment0">Rp0</span>
+                    </div>
+                    <div class="result-item">
                         <span class="result-label">Pendapatan Harian:</span>
                         <span class="result-value" id="daily-earnings0">Rp0</span>
                     </div>
                     <div class="result-item">
-                        <span class="result-label">Total 4 Hari:</span>
+                        <span class="result-label">Total 60 Hari:</span>
                         <span class="result-value" id="total-earnings0">Rp0</span>
                     </div>
                     <div class="result-item">
                         <span class="result-label">Jumlah Akhir:</span>
                         <span class="result-value" id="final-amount0">Rp0</span>
                     </div>
+                    <p id="gift-message0" style="margin-top: 15px; color: var(--accent); font-weight: 600;"></p>
                 </div>
                 
                 <div id="congratulation0" class="congratulation-card">
@@ -412,9 +420,29 @@
                         </thead>
                         <tbody>
                             <tr>
+                                <td>Rp300,000-Rp1,999,999</td>
+                                <td>25%</td>
                                 <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Rp2,000,000-Rp4,999,999</td>
+                                <td>30%</td>
                                 <td>-</td>
-                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Rp5,000,000-Rp19,999,999</td>
+                                <td>35%</td>
+                                <td>Hadiah Fisik Rp1,000,000</td>
+                            </tr>
+                            <tr>
+                                <td>Rp20,000,000-Rp49,999,999</td>
+                                <td>40%</td>
+                                <td>Hadiah Fisik Rp5,000,000</td>
+                            </tr>
+                            <tr>
+                                <td>≥Rp50,000,000</td>
+                                <td>50%</td>
+                                <td>Hadiah Fisik Rp20,000,000</td>
                             </tr>
                         </tbody>
                     </table>
@@ -423,41 +451,43 @@
                 <div class="bonus-card" style="margin-top: 20px;">
                     <h3 class="section-title">💡 Bonus Tim</h3>
                     <p style="font-size: 14px; margin-top: 10px;">
-                        <strong>Kelas A:</strong> 3% dari keuntungan tim<br>
-                        <strong>Kelas B:</strong> 2% dari keuntungan tim<br>
-                        <strong>Kelas C:</strong> 1% dari keuntungan tim
+                        <strong>Kelas A:</strong> 15% dari keuntungan tim<br>
+                        <strong>Kelas B:</strong> 10% dari keuntungan tim<br>
+                        <strong>Kelas C:</strong> 5% dari keuntungan tim
                     </p>
                 </div>
                 
                 <div class="bonus-card project-info" style="margin-top: 20px;">
                     <h3 class="section-title">📊 Informasi Proyek</h3>
                     <p style="font-size: 14px; margin-top: 10px;">
-                        <strong>Nama Proyek:</strong> Investasi Masa Depan Stabil-4 Hari<br>
-                        <strong>Bunga Harian:</strong> 2% (sesuai syariah)<br>
-                        <strong>Minimal Investasi:</strong> Rp30.000<br>
-                        <strong>Periode:</strong> 4 hari
+                        <strong>Nama Proyek:</strong> Manfaat Spesial Maulid - 60 Hari<br>
+                        <strong>Bunga Harian:</strong> 10% + Bonus 5% (Spesial Maulid Nabi)<br>
+                        <strong>Minimal Investasi:</strong> Rp300,000<br>
+                        <strong>Periode:</strong> 60 hari
                     </p>
                 </div>
                 
                 <div class="bonus-card" style="margin-top: 20px;">
                     <h3 class="section-title">📊 Contoh Perhitungan</h3>
                     <p style="font-size: 14px; margin-top: 10px;">
-                        <strong>Investasi:</strong> Rp1,000,000<br>
-                        <strong>Harian:</strong> Rp1,000,000 × 2% = Rp20,000/hari<br>
-                        <strong>4 Hari:</strong> Rp20,000 × 4 = Rp80,000<br>
-                        <strong>Total:</strong> Rp1,000,000 + Rp80,000 = Rp1,080,000
+                        <strong>Investasi:</strong> Rp2,000,000<br>
+                        <strong>Bonus Tambahan:</strong> 30% × Rp2,000,000 = Rp600,000<br>
+                        <strong>Total Investasi:</strong> Rp2,000,000 + Rp600,000 = Rp2,600,000<br>
+                        <strong>Harian:</strong> Rp2,600,000 × 15% = Rp390,000/hari<br>
+                        <strong>Total 60 Hari:</strong> Rp390,000 × 60 = Rp23,400,000<br>
+                        <strong>Jumlah Akhir:</strong> Rp2,600,000 + Rp23,400,000 = Rp26,000,000
                     </p>
                 </div>
                 
                 <div class="countdown">
                     <div class="countdown-title">⏳ Waktu Tersisa untuk Investasi:</div>
-                    <div class="countdown-timer" id="countdown0">06:00:00:00</div>
+                    <div class="countdown-timer" id="countdown0">06:00:00</div>
                     <div class="availability">Kuota sangat terbatas! Jangan sampai kehabisan!</div>
                 </div>
             </div>
         </div>
         
-        <!-- Tab 2: Investasi Masa Depan Stabil-12 Hari -->
+        <!-- Tab 2: Manfaat Spesial Maulid - 100 Hari -->
         <div class="tab-content">
             <div class="calculator-section">
                 <h2 class="section-title">
@@ -466,7 +496,7 @@
                 
                 <div class="form-group">
                     <label for="investment1">Jumlah Investasi (Rp)</label>
-                    <input type="number" id="investment1" placeholder="例如: 1000000" min="30000">
+                    <input type="number" id="investment1" placeholder="例如: 1000000" min="300000">
                 </div>
                 
                 <button onclick="calculate(1)">Hitung Keuntungan</button>
@@ -478,17 +508,26 @@
                         <span class="result-value" id="original-investment1">Rp0</span>
                     </div>
                     <div class="result-item">
+                        <span class="result-label">Bonus Tambahan:</span>
+                        <span class="result-value" id="bonus1">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Total Investasi:</span>
+                        <span class="result-value" id="total-investment1">Rp0</span>
+                    </div>
+                    <div class="result-item">
                         <span class="result-label">Pendapatan Harian:</span>
                         <span class="result-value" id="daily-earnings1">Rp0</span>
                     </div>
                     <div class="result-item">
-                        <span class="result-label">Total 12 Hari:</span>
+                        <span class="result-label">Total 100 Hari:</span>
                         <span class="result-value" id="total-earnings1">Rp0</span>
                     </div>
                     <div class="result-item">
                         <span class="result-label">Jumlah Akhir:</span>
                         <span class="result-value" id="final-amount1">Rp0</span>
                     </div>
+                    <p id="gift-message1" style="margin-top: 15px; color: var(--accent); font-weight: 600;"></p>
                 </div>
                 
                 <div id="congratulation1" class="congratulation-card">
@@ -514,135 +553,29 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div class="bonus-card" style="margin-top: 20px;">
-                    <h3 class="section-title">💡 Bonus Tim</h3>
-                    <p style="font-size: 14px; margin-top: 10px;">
-                        <strong>Kelas A:</strong> 3% dari keuntungan tim<br>
-                        <strong>Kelas B:</strong> 2% dari keuntungan tim<br>
-                        <strong>Kelas C:</strong> 1% dari keuntungan tim
-                    </p>
-                </div>
-                
-                <div class="bonus-card project-info" style="margin-top: 20px;">
-                    <h3 class="section-title">📊 Informasi Proyek</h3>
-                    <p style="font-size: 14px; margin-top: 10px;">
-                        <strong>Nama Proyek:</strong> Investasi Masa Depan Stabil-12 Hari<br>
-                        <strong>Bunga Harian:</strong> 1.2% (sesuai syariah)<br>
-                        <strong>Minimal Investasi:</strong> Rp30.000<br>
-                        <strong>Periode:</strong> 12 hari
-                    </p>
-                </div>
-                
-                <div class="bonus-card" style="margin-top: 20px;">
-                    <h3 class="section-title">📊 Contoh Perhitungan</h3>
-                    <p style="font-size: 14px; margin-top: 10px;">
-                        <strong>Investasi:</strong> Rp1,000,000<br>
-                        <strong>Harian:</strong> Rp1,000,000 × 1.2% = Rp12,000/hari<br>
-                        <strong>12 Hari:</strong> Rp12,000 × 12 = Rp144,000<br>
-                        <strong>Total:</strong> Rp1,000,000 + Rp144,000 = Rp1,144,000
-                    </p>
-                </div>
-                
-                <div class="countdown">
-                    <div class="countdown-title">⏳ Waktu Tersisa untuk Investasi:</div>
-                    <div class="countdown-timer" id="countdown1">06:00:00:00</div>
-                    <div class="availability">Kuota sangat terbatas! Jangan sampai kehabisan!</div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Tab 3: Investasi Masa Depan Stabil-100 Hari -->
-        <div class="tab-content">
-            <div class="calculator-section">
-                <h2 class="section-title">
-                    <span>📈 Kalkulator Investasi</span>
-                </h2>
-                
-                <div class="form-group">
-                    <label for="investment2">Jumlah Investasi (Rp)</label>
-                    <input type="number" id="investment2" placeholder="例如: 1000000" min="30000">
-                </div>
-                
-                <button onclick="calculate(2)">Hitung Keuntungan</button>
-                
-                <div id="result2" class="result-card">
-                    <h3 class="result-title">📊 Hasil Perhitungan</h3>
-                    <div class="result-item">
-                        <span class="result-label">Modal Investasi:</span>
-                        <span class="result-value" id="original-investment2">Rp0</span>
-                    </div>
-                    <div class="result-item">
-                        <span class="result-label">Bonus Tambahan:</span>
-                        <span class="result-value" id="bonus2">Rp0</span>
-                    </div>
-                    <div class="result-item">
-                        <span class="result-label">Total Investasi:</span>
-                        <span class="result-value" id="total-investment2">Rp0</span>
-                    </div>
-                    <div class="result-item">
-                        <span class="result-label">Pendapatan Harian:</span>
-                        <span class="result-value" id="daily-earnings2">Rp0</span>
-                    </div>
-                    <div class="result-item">
-                        <span class="result-label">Total 100 Hari:</span>
-                        <span class="result-value" id="total-earnings2">Rp0</span>
-                    </div>
-                    <div class="result-item">
-                        <span class="result-label">Jumlah Akhir:</span>
-                        <span class="result-value" id="final-amount2">Rp0</span>
-                    </div>
-                    <p id="gift-message2" style="margin-top: 15px; color: var(--accent); font-weight: 600;"></p>
-                </div>
-                
-                <div id="congratulation2" class="congratulation-card">
-                    <h3 class="congratulation-title">🎉 Selamat!</h3>
-                    <div id="congratulation-message2" class="congratulation-message"></div>
-                    <button class="copy-btn" onclick="copyCongratulation(2)">Salin Pesan</button>
-                </div>
-            </div>
-            
-            <div class="calculator-section">
-                <h2 class="section-title">
-                    <span>🎁 Bonus Investasi</span>
-                </h2>
-                
-                <div class="bonus-card">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Jumlah Investasi</th>
-                                <th>Bonus</th>
-                                <th>Hadiah</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Rp300,000-4,999,000</td>
-                                <td>20%</td>
-                                <td>-</td>
-                            </tr>
-                            <tr>
-                                <td>Rp5,000,000-19,999,000</td>
+                                <td>Rp300,000-Rp1,999,999</td>
                                 <td>25%</td>
-                                <td>Sepeda (Rp1,000,000)</td>
+                                <td>-</td>
                             </tr>
                             <tr>
-                                <td>Rp20,000,000-49,999,000</td>
+                                <td>Rp2,000,000-Rp4,999,999</td>
                                 <td>30%</td>
-                                <td>Laptop (Rp5,000,000)</td>
+                                <td>-</td>
                             </tr>
                             <tr>
-                                <td>Rp50,000,000-99,999,000</td>
+                                <td>Rp5,000,000-Rp19,999,999</td>
                                 <td>35%</td>
-                                <td>Elektronik rumah pilihanmu</td>
+                                <td>Hadiah Fisik Rp1,000,000</td>
+                            </tr>
+                            <tr>
+                                <td>Rp20,000,000-Rp49,999,999</td>
+                                <td>40%</td>
+                                <td>Hadiah Fisik Rp5,000,000</td>
+                            </tr>
+                            <tr>
+                                <td>≥Rp50,000,000</td>
+                                <td>50%</td>
+                                <td>Hadiah Fisik Rp20,000,000</td>
                             </tr>
                         </tbody>
                     </table>
@@ -660,9 +593,9 @@
                 <div class="bonus-card project-info" style="margin-top: 20px;">
                     <h3 class="section-title">📊 Informasi Proyek</h3>
                     <p style="font-size: 14px; margin-top: 10px;">
-                        <strong>Nama Proyek:</strong> Investasi Masa Depan Stabil-100 Hari<br>
-                        <strong>Bunga Harian:</strong> 8% (sesuai syariah)<br>
-                        <strong>Minimal Investasi:</strong> Rp30.000<br>
+                        <strong>Nama Proyek:</strong> Manfaat Spesial Maulid - 100 Hari<br>
+                        <strong>Bunga Harian:</strong> 8% + Bonus 5% (Spesial Maulid Nabi)<br>
+                        <strong>Minimal Investasi:</strong> Rp300,000<br>
                         <strong>Periode:</strong> 100 hari
                     </p>
                 </div>
@@ -670,16 +603,18 @@
                 <div class="bonus-card" style="margin-top: 20px;">
                     <h3 class="section-title">📊 Contoh Perhitungan</h3>
                     <p style="font-size: 14px; margin-top: 10px;">
-                        <strong>Investasi:</strong> Rp5,000,000 + Bonus 25% (Rp1,250,000) = Rp6,250,000<br>
-                        <strong>Harian:</strong> Rp6,250,000 × 8% = Rp500,000/hari<br>
-                        <strong>100 Hari:</strong> Rp500,000 × 100 = Rp50,000,000<br>
-                        <strong>Total:</strong> Rp5,000,000 + Rp50,000,000 = Rp55,000,000
+                        <strong>Investasi:</strong> Rp2,000,000<br>
+                        <strong>Bonus Tambahan:</strong> 30% × Rp2,000,000 = Rp600,000<br>
+                        <strong>Total Investasi:</strong> Rp2,000,000 + Rp600,000 = Rp2,600,000<br>
+                        <strong>Harian:</strong> Rp2,600,000 × 13% = Rp338,000/hari<br>
+                        <strong>Total 100 Hari:</strong> Rp338,000 × 100 = Rp33,800,000<br>
+                        <strong>Jumlah Akhir:</strong> Rp2,600,000 + Rp33,800,000 = Rp36,400,000
                     </p>
                 </div>
                 
                 <div class="countdown">
                     <div class="countdown-title">⏳ Waktu Tersisa untuk Investasi:</div>
-                    <div class="countdown-timer" id="countdown2">06:00:00:00</div>
+                    <div class="countdown-timer" id="countdown1">06:00:00</div>
                     <div class="availability">Kuota sangat terbatas! Jangan sampai kehabisan!</div>
                 </div>
             </div>
@@ -703,46 +638,39 @@
         function calculate(projectNum) {
             const investment = parseFloat(document.getElementById(`investment${projectNum}`).value);
             
-            if (isNaN(investment) || investment < 30000) {
-                alert(`Minimal investasi untuk proyek ini adalah Rp30,000`);
+            if (isNaN(investment) || investment < 300000) {
+                alert(`Minimal investasi untuk proyek ini adalah Rp300,000`);
                 return;
             }
             
             // Project-specific variables
             let dailyRate, days, projectName, bonusRate = 0, gift = "";
             if (projectNum === 0) {
-                dailyRate = 0.02; // 2%
-                days = 4;
-                projectName = "Investasi Masa Depan Stabil-4 Hari";
-                bonusRate = 0;
-                gift = "";
-            } else if (projectNum === 1) {
-                dailyRate = 0.012; // 1.2%
-                days = 12;
-                projectName = "Investasi Masa Depan Stabil-12 Hari";
-                bonusRate = 0;
-                gift = "";
+                dailyRate = 0.15; // 10% + 5% Maulid Bonus
+                days = 60;
+                projectName = "Manfaat Spesial Maulid - 60 Hari";
             } else {
-                dailyRate = 0.08; // 8%
+                dailyRate = 0.13; // 8% + 5% Maulid Bonus
                 days = 100;
-                projectName = "Investasi Masa Depan Stabil-100 Hari";
-                // Bonus and gift for 100-day project
-                if (investment >= 50000000) {
-                    bonusRate = 0.35;
-                    gift = "Elektronik rumah pilihanmu";
-                } else if (investment >= 20000000) {
-                    bonusRate = 0.30;
-                    gift = "Laptop senilai Rp5,000,000";
-                } else if (investment >= 5000000) {
-                    bonusRate = 0.25;
-                    gift = "Sepeda senilai Rp1,000,000";
-                } else if (investment >= 300000) {
-                    bonusRate = 0.20;
-                    gift = "";
-                } else {
-                    bonusRate = 0;
-                    gift = "";
-                }
+                projectName = "Manfaat Spesial Maulid - 100 Hari";
+            }
+            
+            // Bonus and gift for both projects
+            if (investment >= 50000000) {
+                bonusRate = 0.50;
+                gift = "Hadiah Fisik senilai Rp20,000,000";
+            } else if (investment >= 20000000) {
+                bonusRate = 0.40;
+                gift = "Hadiah Fisik senilai Rp5,000,000";
+            } else if (investment >= 5000000) {
+                bonusRate = 0.35;
+                gift = "Hadiah Fisik senilai Rp1,000,000";
+            } else if (investment >= 2000000) {
+                bonusRate = 0.30;
+                gift = "";
+            } else if (investment >= 300000) {
+                bonusRate = 0.25;
+                gift = "";
             }
             
             // Calculate bonus with rounding
@@ -752,26 +680,22 @@
             const totalInvestment = investment + bonus;
             const dailyEarnings = Math.round(totalInvestment * dailyRate / 100) * 100;
             const totalEarnings = Math.round(dailyEarnings * days / 1000) * 1000;
-            const finalAmount = investment + totalEarnings;
+            const finalAmount = totalInvestment + totalEarnings; // Updated formula: Jumlah Akhir = Total Investasi + Total Earnings
             
             // Display results
             document.getElementById(`original-investment${projectNum}`).textContent = formatCurrency(investment);
-            if (projectNum === 2) {
-                document.getElementById(`bonus${projectNum}`).textContent = formatCurrency(bonus);
-                document.getElementById(`total-investment${projectNum}`).textContent = formatCurrency(totalInvestment);
-            }
+            document.getElementById(`bonus${projectNum}`).textContent = formatCurrency(bonus);
+            document.getElementById(`total-investment${projectNum}`).textContent = formatCurrency(totalInvestment);
             document.getElementById(`daily-earnings${projectNum}`).textContent = formatCurrency(dailyEarnings);
             document.getElementById(`total-earnings${projectNum}`).textContent = formatCurrency(totalEarnings);
             document.getElementById(`final-amount${projectNum}`).textContent = formatCurrency(finalAmount);
             
-            // Display gift message if applicable
-            if (projectNum === 2) {
-                const giftMessage = document.getElementById(`gift-message${projectNum}`);
-                if (gift) {
-                    giftMessage.innerHTML = `🎁 Anda akan mendapatkan: <strong>${gift}</strong>`;
-                } else {
-                    giftMessage.innerHTML = "";
-                }
+            // Display gift message
+            const giftMessage = document.getElementById(`gift-message${projectNum}`);
+            if (gift) {
+                giftMessage.innerHTML = `🎁 Anda akan mendapatkan: <strong>${gift}</strong>`;
+            } else {
+                giftMessage.innerHTML = "";
             }
             
             document.getElementById(`result${projectNum}`).style.display = 'block';
@@ -792,14 +716,14 @@
                 `;
             }
             
-            const teamBonusText = projectNum === 2 
-                ? "<p>Jika Anda mengajak anggota tim (downline) untuk berpartisipasi, Anda bisa mendapatkan bonus tambahan 15%/10%/5%!</p>"
-                : "<p>Jika Anda mengajak anggota tim (downline) untuk berpartisipasi, Anda bisa mendapatkan bonus tambahan 3%/2%/1%!</p>";
+            const teamBonusText = `
+                <p>Jika Anda mengajak anggota tim (downline) untuk berpartisipasi, Anda bisa mendapatkan bonus tambahan 15%/10%/5%!</p>
+            `;
             
             const message = `
                 <p><span class="emoji">🎉</span> <strong>Selamat atas keberhasilan investasi Anda dalam ${projectName}!</strong> <span class="emoji">🎉</span></p>
                 
-                <p>Modal yang Anda investasikan <strong>${formatCurrency(investment)}</strong>${projectNum === 2 ? ` + Bonus <strong>${formatCurrency(bonus)}</strong>, total <strong>${formatCurrency(totalInvestment)}</strong>` : ""} telah berinvestasi dalam proyek istimewa ini!</p>
+                <p>Modal yang Anda investasikan <strong>${formatCurrency(investment)}</strong> + Bonus <strong>${formatCurrency(bonus)}</strong>, total <strong>${formatCurrency(totalInvestment)}</strong> telah berinvestasi dalam proyek istimewa ini!</p>
                 
                 ${giftMessage}
                 
@@ -837,26 +761,23 @@
         
         // Countdown timer for investment availability
         function updateCountdown() {
-            const targetDate = new Date('August 25, 2025 13:00:00 GMT+0700');
+            const targetDate = new Date('September 5, 2025 19:00:00 GMT+0700');
             const now = new Date();
             const diff = targetDate - now;
             
             if (diff <= 0) {
                 document.getElementById('countdown0').textContent = "Penawaran Telah Berakhir";
                 document.getElementById('countdown1').textContent = "Penawaran Telah Berakhir";
-                document.getElementById('countdown2').textContent = "Penawaran Telah Berakhir";
                 return;
             }
             
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const hours = Math.floor(diff / (1000 * 60 * 60));
             const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((diff % (1000 * 60)) / 1000);
             
-            const countdown = `${days.toString().padStart(2, '0')}:${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            const countdown = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             document.getElementById('countdown0').textContent = countdown;
             document.getElementById('countdown1').textContent = countdown;
-            document.getElementById('countdown2').textContent = countdown;
         }
         
         setInterval(updateCountdown, 1000);
