@@ -16,6 +16,8 @@
             --warning: #f39c12;
             --dark: #2c3e50;
             --light: #ecf0f1;
+            --halal: #27ae60;
+            --halal-dark: #219653;
         }
         
         * {
@@ -78,6 +80,7 @@
             display: flex;
             background: #f8f9fa;
             border-bottom: 1px solid #ddd;
+            overflow-x: auto;
         }
         
         .tab-btn {
@@ -91,12 +94,18 @@
             font-weight: 600;
             color: var(--dark);
             transition: all 0.3s;
+            min-width: 200px;
         }
         
         .tab-btn.active {
             background: white;
             border-bottom: 3px solid var(--primary);
             color: var(--primary);
+        }
+        
+        .tab-btn.halal.active {
+            border-bottom-color: var(--halal);
+            color: var(--halal);
         }
         
         .tab-content {
@@ -179,10 +188,19 @@
             margin-top: 10px;
         }
         
+        button.halal-btn {
+            background: var(--halal);
+        }
+        
         button:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        button.halal-btn:hover {
+            background: var(--halal-dark);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
         }
         
         .result-card {
@@ -193,6 +211,10 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             border-left: 4px solid var(--primary);
             display: none;
+        }
+        
+        .result-card.halal {
+            border-left-color: var(--halal);
         }
         
         .result-title {
@@ -227,6 +249,10 @@
             color: var(--primary);
         }
         
+        .halal .result-value {
+            color: var(--halal);
+        }
+        
         .bonus-card {
             background: white;
             border-radius: 10px;
@@ -234,6 +260,10 @@
             margin-top: 20px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             border-left: 4px solid var(--secondary);
+        }
+        
+        .bonus-card.halal {
+            border-left-color: var(--halal);
         }
         
         table {
@@ -268,6 +298,11 @@
             display: none;
         }
         
+        .congratulation-card.halal {
+            border-left-color: var(--halal);
+            background: linear-gradient(to right, #f8f9fa, #e9faf1);
+        }
+        
         .congratulation-title {
             font-size: 18px;
             margin-bottom: 15px;
@@ -291,10 +326,19 @@
             margin-top: 15px;
         }
         
+        .copy-btn.halal {
+            background: var(--halal);
+        }
+        
         .copy-btn:hover {
             background: var(--secondary-dark);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(155, 89, 182, 0.3);
+        }
+        
+        .copy-btn.halal:hover {
+            background: var(--halal-dark);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
         }
         
         .gift-badge {
@@ -323,10 +367,18 @@
             text-align: center;
         }
         
+        .countdown.halal {
+            border-left-color: var(--halal);
+        }
+        
         .countdown-title {
             font-weight: 700;
             margin-bottom: 10px;
             color: var(--accent);
+        }
+        
+        .countdown.halal .countdown-title {
+            color: var(--halal);
         }
         
         .countdown-timer {
@@ -335,9 +387,25 @@
             color: var(--accent);
         }
         
+        .countdown.halal .countdown-timer {
+            color: var(--halal);
+        }
+        
         .availability {
             margin-top: 10px;
             font-weight: 600;
+        }
+        
+        .halal-badge {
+            display: inline-block;
+            background: var(--halal);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 5px;
+            vertical-align: middle;
         }
     </style>
 </head>
@@ -352,6 +420,7 @@
         <div class="tabs">
             <button class="tab-btn active" onclick="switchTab(0)">1 Juta Tunjangan Karyawan - 50 Hari</button>
             <button class="tab-btn" onclick="switchTab(1)">1 Juta Tunjangan Karyawan - 100 Hari</button>
+            <button class="tab-btn halal" onclick="switchTab(2)">Proyek Energi Baru Halal - 15 Hari</button>
         </div>
         
         <!-- Tab 1: 1 Juta Tunjangan Karyawan - 50 Hari -->
@@ -619,6 +688,141 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Tab 3: Proyek Energi Baru Halal - 15 Hari -->
+        <div class="tab-content">
+            <div class="calculator-section">
+                <h2 class="section-title">
+                    <span>📈 Kalkulator Investasi Halal</span>
+                    <span class="halal-badge">HALAL</span>
+                </h2>
+                
+                <div class="form-group">
+                    <label for="investment2">Jumlah Investasi (Rp)</label>
+                    <input type="number" id="investment2" placeholder="例如: 2000000" min="200000">
+                </div>
+                
+                <button class="halal-btn" onclick="calculate(2)">Hitung Keuntungan</button>
+                
+                <div id="result2" class="result-card halal">
+                    <h3 class="result-title">📊 Hasil Perhitungan</h3>
+                    <div class="result-item">
+                        <span class="result-label">Modal Investasi:</span>
+                        <span class="result-value" id="original-investment2">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Bonus Tambahan:</span>
+                        <span class="result-value" id="bonus2">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Total Investasi:</span>
+                        <span class="result-value" id="total-investment2">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Pendapatan Harian:</span>
+                        <span class="result-value" id="daily-earnings2">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Total 15 Hari:</span>
+                        <span class="result-value" id="total-earnings2">Rp0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Jumlah Akhir:</span>
+                        <span class="result-value" id="final-amount2">Rp0</span>
+                    </div>
+                    <p id="gift-message2" style="margin-top: 15px; color: var(--halal); font-weight: 600;"></p>
+                </div>
+                
+                <div id="congratulation2" class="congratulation-card halal">
+                    <h3 class="congratulation-title">🎉 Selamat!</h3>
+                    <div id="congratulation-message2" class="congratulation-message"></div>
+                    <button class="copy-btn halal" onclick="copyCongratulation(2)">Salin Pesan</button>
+                </div>
+            </div>
+            
+            <div class="calculator-section">
+                <h2 class="section-title">
+                    <span>🎁 Bonus Investasi Halal</span>
+                    <span class="halal-badge">HALAL</span>
+                </h2>
+                
+                <div class="bonus-card halal">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Jumlah Investasi</th>
+                                <th>Bonus</th>
+                                <th>Hadiah</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Rp200,000-999,999</td>
+                                <td>15%</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Rp1,000,000-4,999,999</td>
+                                <td>20%</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Rp5,000,000-19,999,999</td>
+                                <td>25%</td>
+                                <td>Paket Hadiah Halal (Rp500,000)</td>
+                            </tr>
+                            <tr>
+                                <td>Rp20,000,000-49,999,999</td>
+                                <td>30%</td>
+                                <td>Paket Hadiah Halal (Rp2,000,000)</td>
+                            </tr>
+                            <tr>
+                                <td>≥ Rp50,000,000</td>
+                                <td>35%</td>
+                                <td>Paket Hadiah Halal (Rp5,000,000)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="bonus-card halal" style="margin-top: 20px;">
+                    <h3 class="section-title">💡 Berbagi Keberkahan Tim</h3>
+                    <p style="font-size: 14px; margin-top: 10px;">
+                        <strong>Level A:</strong> 20% dari keuntungan tim<br>
+                        <strong>Level B:</strong> 15% dari keuntungan tim<br>
+                        <strong>Level C:</strong> 10% dari keuntungan tim
+                    </p>
+                </div>
+                
+                <div class="bonus-card project-info" style="margin-top: 20px;">
+                    <h3 class="section-title">📊 Informasi Proyek</h3>
+                    <p style="font-size: 14px; margin-top: 10px;">
+                        <strong>Nama Proyek:</strong> Proyek Energi Baru Halal - 15 Hari<br>
+                        <strong>Imbal Harian:</strong> 8% (Insentif sesuai prinsip syariah)<br>
+                        <strong>Minimal Investasi:</strong> Rp200,000<br>
+                        <strong>Periode:</strong> 15 hari
+                    </p>
+                </div>
+                
+                <div class="bonus-card" style="margin-top: 20px;">
+                    <h3 class="section-title">📊 Contoh Perhitungan</h3>
+                    <p style="font-size: 14px; margin-top: 10px;">
+                        <strong>Investasi:</strong> Rp2,000,000<br>
+                        <strong>Bonus Tambahan:</strong> 20% × Rp2,000,000 = Rp400,000<br>
+                        <strong>Total Investasi:</strong> Rp2,000,000 + Rp400,000 = Rp2,400,000<br>
+                        <strong>Harian:</strong> Rp2,400,000 × 8% = Rp192,000/hari<br>
+                        <strong>Total 15 Hari:</strong> Rp192,000 × 15 = Rp2,880,000<br>
+                        <strong>Jumlah Akhir:</strong> Rp2,400,000 + Rp2,880,000 = Rp5,280,000
+                    </p>
+                </div>
+                
+                <div class="countdown halal">
+                    <div class="countdown-title">⏳ Waktu Tersisa untuk Investasi:</div>
+                    <div class="countdown-timer" id="countdown2">06:00:00</div>
+                    <div class="availability">Kuota sangat terbatas! Jangan sampai kehabisan!</div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -636,41 +840,91 @@
         
         // Calculation function
         function calculate(projectNum) {
-            const investment = parseFloat(document.getElementById(`investment${projectNum}`).value);
+            let investment, minInvestment;
             
-            if (isNaN(investment) || investment < 30000) {
-                alert(`Minimal investasi untuk proyek ini adalah Rp30,000`);
+            if (projectNum === 2) {
+                // Proyek Halal - minimal Rp200,000
+                investment = parseFloat(document.getElementById(`investment${projectNum}`).value);
+                minInvestment = 200000;
+            } else {
+                // Proyek lainnya - minimal Rp30,000
+                investment = parseFloat(document.getElementById(`investment${projectNum}`).value);
+                minInvestment = 30000;
+            }
+            
+            if (isNaN(investment) || investment < minInvestment) {
+                alert(`Minimal investasi untuk proyek ini adalah Rp${minInvestment.toLocaleString('id-ID')}`);
                 return;
             }
             
             // Project-specific variables
             let dailyRate, days, projectName, bonusRate = 0, gift = "";
+            
             if (projectNum === 0) {
-                dailyRate = 0.15; // 15% (10% + 5% subsidy)
+                // 50 Hari
+                dailyRate = 0.15;
                 days = 50;
                 projectName = "1 Juta Tunjangan Karyawan - 50 Hari";
-            } else {
-                dailyRate = 0.13; // 13% (8% + 5% subsidy)
+                
+                // Bonus structure for 50 Hari
+                if (investment >= 50000000) {
+                    bonusRate = 0.50;
+                    gift = "Hadiah Fisik senilai Rp20,000,000 (Pilihan Anda)";
+                } else if (investment >= 20000000) {
+                    bonusRate = 0.40;
+                    gift = "Hadiah Fisik senilai Rp5,000,000 (Pilihan Anda)";
+                } else if (investment >= 5000000) {
+                    bonusRate = 0.35;
+                    gift = "Hadiah Fisik senilai Rp1,000,000 (Pilihan Anda)";
+                } else if (investment >= 2000000) {
+                    bonusRate = 0.30;
+                } else if (investment >= 300000) {
+                    bonusRate = 0.25;
+                }
+            } 
+            else if (projectNum === 1) {
+                // 100 Hari
+                dailyRate = 0.13;
                 days = 100;
                 projectName = "1 Juta Tunjangan Karyawan - 100 Hari";
+                
+                // Bonus structure for 100 Hari
+                if (investment >= 50000000) {
+                    bonusRate = 0.50;
+                    gift = "Hadiah Fisik senilai Rp20,000,000 (Pilihan Anda)";
+                } else if (investment >= 20000000) {
+                    bonusRate = 0.40;
+                    gift = "Hadiah Fisik senilai Rp5,000,000 (Pilihan Anda)";
+                } else if (investment >= 5000000) {
+                    bonusRate = 0.35;
+                    gift = "Hadiah Fisik senilai Rp1,000,000 (Pilihan Anda)";
+                } else if (investment >= 2000000) {
+                    bonusRate = 0.30;
+                } else if (investment >= 300000) {
+                    bonusRate = 0.25;
+                }
             }
-            
-            // Bonus and gift for all projects
-            if (investment >= 50000000) {
-                bonusRate = 0.50;
-                gift = "Hadiah Fisik senilai Rp20,000,000 (Pilihan Anda)";
-            } else if (investment >= 20000000) {
-                bonusRate = 0.40;
-                gift = "Hadiah Fisik senilai Rp5,000,000 (Pilihan Anda)";
-            } else if (investment >= 5000000) {
-                bonusRate = 0.35;
-                gift = "Hadiah Fisik senilai Rp1,000,000 (Pilihan Anda)";
-            } else if (investment >= 2000000) {
-                bonusRate = 0.30;
-                gift = "";
-            } else if (investment >= 300000) {
-                bonusRate = 0.25;
-                gift = "";
+            else if (projectNum === 2) {
+                // Proyek Halal 15 Hari
+                dailyRate = 0.08;
+                days = 15;
+                projectName = "Proyek Energi Baru Halal - 15 Hari";
+                
+                // Bonus structure for Proyek Halal
+                if (investment >= 50000000) {
+                    bonusRate = 0.35;
+                    gift = "Paket Hadiah Halal senilai Rp5,000,000";
+                } else if (investment >= 20000000) {
+                    bonusRate = 0.30;
+                    gift = "Paket Hadiah Halal senilai Rp2,000,000";
+                } else if (investment >= 5000000) {
+                    bonusRate = 0.25;
+                    gift = "Paket Hadiah Halal senilai Rp500,000";
+                } else if (investment >= 1000000) {
+                    bonusRate = 0.20;
+                } else if (investment >= 200000) {
+                    bonusRate = 0.15;
+                }
             }
             
             // Calculate bonus with rounding
@@ -716,7 +970,17 @@
                 `;
             }
             
-            const teamBonusText = "<p>Jika Anda mengajak anggota tim (downline) untuk berpartisipasi, Anda bisa mendapatkan bonus tambahan 20%/15%/10%!</p>";
+            let teamBonusText = "";
+            if (projectNum === 2) {
+                teamBonusText = "<p>Jika Anda mengajak anggota tim (downline) untuk berpartisipasi, Anda bisa mendapatkan bonus tambahan 20%/15%/10% sesuai level!</p>";
+            } else {
+                teamBonusText = "<p>Jika Anda mengajak anggota tim (downline) untuk berpartisipasi, Anda bisa mendapatkan bonus tambahan 20%/15%/10%!</p>";
+            }
+            
+            let specialMessage = "";
+            if (projectNum === 2) {
+                specialMessage = "<p><span class='emoji'>☪️</span> Proyek ini dikelola sesuai prinsip syariah dan dijamin kehalalannya. Seluruh keuntungan berasal dari bisnis energi baru yang sesuai dengan syariat Islam.</p>";
+            }
             
             const message = `
                 <p><span class="emoji">🎉</span> <strong>Selamat atas keberhasilan investasi Anda dalam ${projectName}!</strong> <span class="emoji">🎉</span></p>
@@ -728,6 +992,8 @@
                 <p><span class="emoji">🚀</span> Dengan pengembalian harian yang stabil, Anda akan mendapatkan:</p>
                 
                 ${teamBonusText}
+                
+                ${specialMessage}
                 
                 <p>Proyek ini dijamin oleh PT BWM dengan pengembalian yang stabil dan terjamin. <span class="emoji">🛡️</span></p>
                 
@@ -766,6 +1032,7 @@
             if (diff <= 0) {
                 document.getElementById('countdown0').textContent = "Penawaran Telah Berakhir";
                 document.getElementById('countdown1').textContent = "Penawaran Telah Berakhir";
+                document.getElementById('countdown2').textContent = "Penawaran Telah Berakhir";
                 return;
             }
             
@@ -776,6 +1043,7 @@
             const countdown = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             document.getElementById('countdown0').textContent = countdown;
             document.getElementById('countdown1').textContent = countdown;
+            document.getElementById('countdown2').textContent = countdown;
         }
         
         setInterval(updateCountdown, 1000);
